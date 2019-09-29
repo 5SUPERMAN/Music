@@ -1,0 +1,37 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/audio/audio",
+    "pages/profile/profile"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#32CD32",
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "音乐"
+  },
+  "tabBar": {
+    "color": "#515151",
+    "selectedColor": "#32CD32",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "音乐库",
+        "iconPath": "/assets/icon/musiclibrary.png",
+        "selectedIconPath": "/assets/icon/musiclibrary_active.png"
+      },
+      {
+        "pagePath": "pages/audio/audio",
+        "text": "播放",
+        "iconPath": "/assets/icon/music.png",
+        "selectedIconPath": "/assets/icon/music_active.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的",
+        "iconPath": "/assets/icon/people.png",
+        "selectedIconPath": "/assets/icon/people_active.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}
