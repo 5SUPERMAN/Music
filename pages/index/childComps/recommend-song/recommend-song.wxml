@@ -1,0 +1,17 @@
+<!--pages/index/childComps/recommend-song/recommend-song.wxml-->
+<view class="recommend-song">
+  <view class="item-title">
+    <text class="title">{{title}}</text>
+    <text class="right">更多</text>
+    <image class="icon" src="/assets/icon/arrow.png" />
+  </view>
+
+  <view class="recommend-item">
+    <block wx:for="{{recommendSong}}" wx:key="{{index}}">
+      <view class="song-sheet-item" data-index="{{index}}">
+        <image class="image" src="{{item.image}}" />
+        <text class="name">{{item.songSheetName}}</text>
+      </view>
+    </block>
+  </view>
+</view>

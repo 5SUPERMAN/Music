@@ -1,5 +1,7 @@
 {
   "usingComponents": {
-    "mp-searchbar": "../../components/weui-miniprogram/searchbar/searchbar"
+    "mp-searchbar": "/components/weui-miniprogram/searchbar/searchbar",
+    "new-music": "./childComps/new-music/new-music",
+    "recommend-song": "./childComps/recommend-song/recommend-song"
   }
 }

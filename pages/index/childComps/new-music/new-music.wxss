@@ -1,0 +1,72 @@
+/* pages/index/childComps/new-music/new-music.wxss */
+.new-music{
+  padding-top: 50px;
+  margin-bottom: 20rpx;
+}
+.item-title {
+  height: 70rpx;
+  line-height: 70rpx;
+  padding: 0 24rpx;
+  position: relative;
+}
+
+.title {
+  font-size: 36rpx;
+}
+
+.right {
+  float: right;
+  font-size: 26rpx;
+  color: #515151;
+  padding-right: 34rpx;
+}
+
+.icon {
+  position: absolute;
+  top: 24rpx;
+  right: 32rpx;
+  width: 26rpx;
+  height: 26rpx;
+}
+
+.new-item {
+  padding: 0 20rpx;
+}
+
+.item-music {
+  padding: 10rpx 0;
+  position: relative;
+}
+
+.item-music .icon {
+  position: absolute;
+  top: 50rpx;
+  right: 14rpx;
+  width: 26rpx;
+  height: 26rpx;
+}
+
+.item-image {
+  border-radius: 20rpx;
+  width: 120rpx;
+  height: 120rpx;
+}
+
+.song-name {
+  position: absolute;
+  top: 24rpx;
+  left: 160rpx;
+  width: 440rpx;
+  font-size: 28rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.singer {
+  position: absolute;
+  top: 80rpx;
+  left: 160rpx;
+  width: 440rpx;
+  font-size: 24rpx;
+}

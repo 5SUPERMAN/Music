@@ -1,5 +1,10 @@
 .weui-search-bar {
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  
   padding: 8px;
   display: flex;
   box-sizing: border-box;
