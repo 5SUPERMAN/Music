@@ -5,6 +5,10 @@
     "pages/profile/profile",
     "pages/new-music-more/new-music-more"
   ],
+  "requiredBackgroundModes": [
+    "audio",
+    "location"
+  ],
   "window": {
     "navigationBarBackgroundColor": "#32CD32",
     "navigationBarTextStyle": "white",

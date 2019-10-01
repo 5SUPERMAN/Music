@@ -14,6 +14,7 @@ import {
 } from "../../utils/debounce.js"
 
 const innerAudioContext = wx.createInnerAudioContext()
+const backgroundAudioManager = wx.getBackgroundAudioManager()
 
 Page({
   data: {
@@ -21,6 +22,7 @@ Page({
     recommendTitle: '推荐歌单',
     hotTitle: '热门歌单',
     indexNewMusic: [],
+    newMusic: [],
     index: -1,
     isPlay: false,
     // playIndex: 0,
@@ -31,6 +33,8 @@ Page({
     this._getNewMusic();
     this._getRecommendSong();
     this._getTopSong();
+
+    this._getNewMusicMore();
   },
   onReady: function() {
     // for (let i = 0; i < this.data.indexNewMusic.length; i++) {
@@ -45,6 +49,22 @@ Page({
   },
 
   // -----------事件函数-----------
+  handleMore() {
+    wx.navigateTo({
+      url: '/pages/new-music-more/new-music-more',
+      events: {
+        someEvent: data => {
+          this.setData({
+            isPlay: data[0],
+            index: data[1]
+          })
+        }
+      },
+      success: (res) => {
+        res.eventChannel.emit('newMusicData', [this.data.newMusic,this.data.isPlay,this.data.index])
+      }
+    })
+  },
   imageLoad: debounce(function() {
     this.data.indexNewMusic.forEach(item => {
       const id = item.songId;
@@ -52,32 +72,39 @@ Page({
     })
   }, 500),
   handlePlay(e) {
-    // if (this.data.indexNewMusic[0].length !== 6) {
-    //   for (let i = 0; i < this.data.indexNewMusic.length; i++) {
-    //     const id = this.data.indexNewMusic[i].songId;
-    //     this._getMusicUrl(id)
-    //   }
-    // }
-
     let index = e.detail.index;
     if (this.data.index !== index) {
       this.setData({
         index: index
       })
       innerAudioContext.src = this.data.indexNewMusic[index].url;
+
+      backgroundAudioManager.title = this.data.indexNewMusic[index].songName;
+      backgroundAudioManager.coverImgUrl = this.data.indexNewMusic[index].image;
+      backgroundAudioManager.singer = this.data.indexNewMusic[index].singer;
+      backgroundAudioManager.src = this.data.indexNewMusic[index].url
+
       this.data.isPlay = false;
     }
     if (!innerAudioContext.src) {
       innerAudioContext.src = this.data.indexNewMusic[index].url;
+      backgroundAudioManager.src = this.data.indexNewMusic[index].url;
+
       this.data.isPlay = false;
     }
 
     if (!this.data.isPlay) {
-      this.data.isPlay = !this.data.isPlay;
-      innerAudioContext.play();
+      this.setData({
+        isPlay: !this.data.isPlay
+      })
+      // innerAudioContext.play();
+      backgroundAudioManager.play();
     } else {
-      this.data.isPlay = !this.data.isPlay;
-      innerAudioContext.pause();
+      this.setData({
+        isPlay: !this.data.isPlay
+      })
+      // innerAudioContext.pause();
+      backgroundAudioManager.pause();
       this.setData({
         index: -1
       })
@@ -105,7 +132,28 @@ Page({
       console.error(err)
     })
   },
-  _getRecommendSong(){
+
+  _getNewMusicMore() {
+    getNewMusic().then(res => {
+      const data = res.data.data;
+      for (let i = 0; i < 50; i++) {
+        let newMusicItem = {};
+        newMusicItem.songId = data[i].id;
+        newMusicItem.img = data[i].album.picUrl;
+        newMusicItem.songName = data[i].name;
+        newMusicItem.singerId = data[i].artists[0].id;
+        newMusicItem.singer = data[i].artists[0].name;
+        this.data.newMusic.push(newMusicItem)
+        this.setData({
+          newMusic: this.data.newMusic
+        })
+      }
+    }).catch(err => {
+      console.error(err)
+    })
+  },
+
+  _getRecommendSong() {
     getRecommendSong().then(res => {
       const result = res.data.result;
       result.forEach(item => {

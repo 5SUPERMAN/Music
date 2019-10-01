@@ -22,10 +22,6 @@ Component({
    * 组件的初始数据
    */
   data: {
-
-  },
-
-  show: function() {
     
   },
 
@@ -35,16 +31,16 @@ Component({
   methods: {
     handlePlay(e) {
       let index = e.currentTarget.dataset.index;
-      this.triggerEvent('handleplay',{index},{});
+      this.triggerEvent('handleplay', {
+        index
+      }, {});
     },
     imageLoad() {
       this.triggerEvent('imageload')
     },
 
     handleMore() {
-      wx.navigateTo({
-        url: '/pages/new-music-more/new-music-more',
-      })
+      this.triggerEvent('handleMore')
     }
   }
 })
