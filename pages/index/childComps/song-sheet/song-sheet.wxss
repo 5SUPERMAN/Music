@@ -34,7 +34,7 @@
 .song-sheet-item{
   width: 220rpx;
   height: 220rpx;
-  padding-bottom: 100rpx;
+  padding-bottom: 120rpx;
   position: relative;
 }
 .song-sheet-item image{
@@ -44,13 +44,13 @@
 }
 .name{
   position: absolute;
-  bottom: 50rpx;
+  bottom: 0;
   left: 0;
   right: 0;
-  /* height: 120rpx; */
-  font-size: 28rpx;
+  height: 120rpx;
+  font-size: 26rpx;
   padding: 0 10rpx;
-  overflow: hidden;
+  /* overflow: hidden;
   white-space: nowrap;
-  text-overflow: ellipsis;
+  text-overflow: ellipsis; */
 }

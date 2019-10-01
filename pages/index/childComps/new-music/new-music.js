@@ -11,6 +11,10 @@ Component({
     indexNewMusic: {
       type: Array,
       value: []
+    },
+    playIndex: {
+      type: Number,
+      value: -1
     }
   },
 
@@ -38,7 +42,9 @@ Component({
     },
 
     handleMore() {
-      
+      wx.navigateTo({
+        url: '/pages/new-music-more/new-music-more',
+      })
     }
   }
 })

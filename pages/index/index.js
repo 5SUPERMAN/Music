@@ -3,11 +3,15 @@ import {
   getNewMusic,
   getRecommendSong,
   getTopSong
-} from '../../service/index.js'
+} from '../../service/music.js'
 
 import {
   getMusicUrl
 } from '../../service/musicUrl.js'
+
+import {
+  debounce
+} from "../../utils/debounce.js"
 
 const innerAudioContext = wx.createInnerAudioContext()
 
@@ -17,8 +21,9 @@ Page({
     recommendTitle: '推荐歌单',
     hotTitle: '热门歌单',
     indexNewMusic: [],
-    index: 0,
+    index: -1,
     isPlay: false,
+    // playIndex: 0,
     recommendSong: [],
     topSong: []
   },
@@ -28,22 +33,24 @@ Page({
     this._getTopSong();
   },
   onReady: function() {
-    for (let i = 0; i < this.data.indexNewMusic.length; i++) {
-      const id = this.data.indexNewMusic[i].songId;
-      this._getMusicUrl(id)
-    }
-  },
-  onShow: function() {
+    // for (let i = 0; i < this.data.indexNewMusic.length; i++) {
+    //   const id = this.data.indexNewMusic[i].songId;
+    //   this._getMusicUrl(id)
+    // }
 
+    this.data.indexNewMusic.forEach(item => {
+      const id = item.songId;
+      this._getMusicUrl(id)
+    })
   },
 
   // -----------事件函数-----------
-  imageLoad() {
-    for (let i = 0; i < this.data.indexNewMusic.length; i++) {
-      const id = this.data.indexNewMusic[i].songId;
+  imageLoad: debounce(function() {
+    this.data.indexNewMusic.forEach(item => {
+      const id = item.songId;
       this._getMusicUrl(id)
-    }
-  },
+    })
+  }, 500),
   handlePlay(e) {
     // if (this.data.indexNewMusic[0].length !== 6) {
     //   for (let i = 0; i < this.data.indexNewMusic.length; i++) {
@@ -54,7 +61,9 @@ Page({
 
     let index = e.detail.index;
     if (this.data.index !== index) {
-      this.data.index = index;
+      this.setData({
+        index: index
+      })
       innerAudioContext.src = this.data.indexNewMusic[index].url;
       this.data.isPlay = false;
     }
@@ -69,6 +78,9 @@ Page({
     } else {
       this.data.isPlay = !this.data.isPlay;
       innerAudioContext.pause();
+      this.setData({
+        index: -1
+      })
     }
   },
 
@@ -90,7 +102,7 @@ Page({
         })
       }
     }).catch(err => {
-      console.err(err)
+      console.error(err)
     })
   },
   _getRecommendSong(){
@@ -107,7 +119,7 @@ Page({
         })
       })
     }).catch(err => {
-      console.err(err)
+      console.error(err)
     })
   },
   _getTopSong() {
@@ -124,7 +136,7 @@ Page({
         })
       })
     }).catch(err => {
-      console.err(err)
+      console.error(err)
     })
   },
 
@@ -136,7 +148,7 @@ Page({
         indexNewMusic: this.data.indexNewMusic
       })
     }).catch(err => {
-      console.log(err)
+      console.error(err)
     })
   }
 })

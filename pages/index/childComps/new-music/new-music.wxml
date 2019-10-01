@@ -8,7 +8,11 @@
 
   <view class="new-item">
     <block wx:for="{{indexNewMusic}}" wx:key="{{index}}">
-      <view class="item-music" bind:tap="handlePlay" data-index="{{index}}">
+      <view class="item-music" hover-class="item-music-hover" bind:tap="handlePlay" data-index="{{index}}">
+        <block>
+          <image wx:if="{{playIndex !== index}}" class="play" src="/assets/icon/play.png" />
+          <image wx:else class="pause" src="/assets/icon/pause.png" />
+        </block>
         <image class="item-image" src="{{item.img}}" bindload="imageLoad" />
         <text class="song-name">{{item.songName}}</text>
         <text class="singer">{{item.singer}}</text>

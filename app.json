@@ -2,7 +2,8 @@
   "pages": [
     "pages/index/index",
     "pages/audio/audio",
-    "pages/profile/profile"
+    "pages/profile/profile",
+    "pages/new-music-more/new-music-more"
   ],
   "window": {
     "navigationBarBackgroundColor": "#32CD32",
