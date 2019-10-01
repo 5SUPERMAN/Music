@@ -35,6 +35,10 @@ Component({
     },
     imageLoad() {
       this.triggerEvent('imageload')
+    },
+
+    handleMore() {
+      
     }
   }
 })

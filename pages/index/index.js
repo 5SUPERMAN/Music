@@ -112,7 +112,6 @@ Page({
   },
   _getTopSong() {
     getTopSong().then(res => {
-      console.log(res)
       const playLists = res.data.playlists;
       playLists.forEach(list => {
         let playList = {};

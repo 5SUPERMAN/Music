@@ -2,7 +2,7 @@
 <view class="new-music">
   <view class="item-title">
     <text class="title">{{title}}</text>
-    <text class="right">更多</text>
+    <text class="right" bindtap="handleMore">更多</text>
     <image class="icon" src="/assets/icon/arrow.png" />
   </view>
 
