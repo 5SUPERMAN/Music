@@ -38,6 +38,7 @@ Page({
 
     this._getNewMusicMore();
     this._getRecommendSong(30);
+    this._getTopSong(30);
   },
   onReady: function() {
     // for (let i = 0; i < this.data.indexNewMusic.length; i++) {
@@ -83,7 +84,7 @@ Page({
     wx.navigateTo({
       url: '/pages/song-sheet-more/song-sheet-more',
       success: res => {
-
+        res.eventChannel.emit('topMoreData', this.data.topMore)
       }
     })
   },
@@ -146,10 +147,10 @@ Page({
         newMusicItem.singer = data[i].artists[0].name;
 
         this.data.indexNewMusic.push(newMusicItem)
-        this.setData({
-          indexNewMusic: this.data.indexNewMusic
-        })
       }
+      this.setData({
+        indexNewMusic: this.data.indexNewMusic
+      })
     }).catch(err => {
       console.error(err)
     })
@@ -166,10 +167,10 @@ Page({
         newMusicItem.singerId = data[i].artists[0].id;
         newMusicItem.singer = data[i].artists[0].name;
         this.data.newMusic.push(newMusicItem)
-        this.setData({
-          newMusic: this.data.newMusic
-        })
       }
+      this.setData({
+        newMusic: this.data.newMusic
+      })
     }).catch(err => {
       console.error(err)
     })
@@ -185,9 +186,9 @@ Page({
           songSheet.songSheetName = item.name;
           songSheet.image = item.picUrl;
           this.data.recommendSong.push(songSheet)
-          this.setData({
-            recommendSong: this.data.recommendSong
-          })
+        })
+        this.setData({
+          recommendSong: this.data.recommendSong
         })
       }).catch(err => {
         console.error(err)
@@ -201,31 +202,50 @@ Page({
           songSheet.songSheetName = item.name;
           songSheet.image = item.picUrl;
           this.data.recommendMore.push(songSheet)
-          this.setData({
-            recommendMore: this.data.recommendMore
-          })
+        })
+        this.setData({
+          recommendMore: this.data.recommendMore
         })
       }).catch(err => {
         console.error(err)
       })
     }
   },
-  _getTopSong() {
-    getTopSong().then(res => {
-      const playLists = res.data.playlists;
-      playLists.forEach(list => {
-        let playList = {};
-        playList.songSheetId = list.id;
-        playList.songSheetName = list.name;
-        playList.image = list.coverImgUrl;
-        this.data.topSong.push(playList);
+
+  _getTopSong(limit) {
+    if(!limit){
+      getTopSong(limit).then(res => {
+        const playLists = res.data.playlists;
+        playLists.forEach(list => {
+          let playList = {};
+          playList.songSheetId = list.id;
+          playList.songSheetName = list.name;
+          playList.image = list.coverImgUrl;
+          this.data.topSong.push(playList);
+        })
         this.setData({
           topSong: this.data.topSong
         })
+      }).catch(err => {
+        console.error(err)
       })
-    }).catch(err => {
-      console.error(err)
-    })
+    }else{
+      getTopSong(limit).then(res => {
+        const playLists = res.data.playlists;
+        playLists.forEach(list => {
+          let playList = {};
+          playList.songSheetId = list.id;
+          playList.songSheetName = list.name;
+          playList.image = list.coverImgUrl;
+          this.data.topMore.push(playList);
+        })
+        this.setData({
+          topMore: this.data.topMore
+        })
+      }).catch(err => {
+        console.error(err)
+      })
+    }
   },
 
   _getMusicUrl(id) {

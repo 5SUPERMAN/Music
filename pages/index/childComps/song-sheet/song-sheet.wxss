@@ -25,7 +25,7 @@
   height: 26rpx;
 }
 
-.recommend-item{
+.sheet-item{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;

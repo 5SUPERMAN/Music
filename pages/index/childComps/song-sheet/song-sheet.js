@@ -8,7 +8,7 @@ Component({
       type: String,
       value: ''
     },
-    recommendSong: {
+    songSheet: {
       type: Array,
       value: []
     }

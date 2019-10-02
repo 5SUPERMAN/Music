@@ -1,72 +1,100 @@
 // pages/song-sheet-more/song-sheet-more.js
+import {
+  getRecommendSong,
+  getTopSong
+} from '../../service/music.js'
+
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    songSheetMore: []
+    recommendMore: [],
+    topMore: [],
+    page: 1
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
+  onLoad: function(options) {
     const eventChannel = this.getOpenerEventChannel();
 
+    // 推荐歌单
     eventChannel.on('RecommendMoreData', data => {
       this.setData({
-        songSheetMore: data
+        recommendMore: data
+      })
+    })
+
+    // 热门歌单
+    eventChannel.on('topMoreData', data => {
+      this.setData({
+        topMore: data
       })
     })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  onReachBottom: function() {
+    if(this.data.recommendMore.length !== 0){
+      this._getRecommendSong(30);
+    }else{
+      this._getTopSong(30);
+    }
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
+  // -----------事件处理函数-----------
 
+  // -----------网络请求-----------
+  _getRecommendSong(limit) {
+    this.setData({
+      page: this.data.page + 1
+    })
+    // 方法一：清空原来的数据就不会下面请求完成数据录入就不会有重复
+    // this.data.recommendMore = this.data.recommendMore.splice(this.data.recommendMore.length, this.data.recommendMore.length)
+
+    // 方法二：推荐使用此方法
+    const length = this.data.recommendMore.length
+
+    getRecommendSong((this.data.page * limit)).then(res => {
+      const result = res.data.result;
+      let nullRecommendMore = [];
+      result.forEach(item => {
+        let songSheet = {};
+        songSheet.songSheetId = item.id;
+        songSheet.songSheetName = item.name;
+        songSheet.image = item.picUrl;
+        // this.data.recommendMore.push(songSheet)
+        nullRecommendMore.push(songSheet)
+      })
+      this.data.recommendMore.push(...nullRecommendMore.slice(length))
+      this.setData({
+        recommendMore: this.data.recommendMore
+      })
+    }).catch(err => {
+      console.error(err)
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
+  _getTopSong(limit) {
+    this.setData({
+      page: this.data.page + 1
+    })
+    // 方法一：清空原来的数据就不会下面请求完成数据录入就不会有重复
+    // this.data.topMore = this.data.topMore.splice(this.data.topMore.length, this.data.topMore.length)
 
+    // 方法二：推荐使用此方法
+    const length = this.data.topMore.length
+
+    getTopSong(this.data.page * limit).then(res => {
+      const playLists = res.data.playlists;
+      let nullTopMore = [];
+      playLists.forEach(list => {
+        let playList = {};
+        playList.songSheetId = list.id;
+        playList.songSheetName = list.name;
+        playList.image = list.coverImgUrl;
+        // this.data.topMore.push(playList);
+        nullTopMore.push(playList);
+      })
+      this.data.topMore.push(...nullTopMore.slice(length))
+      this.setData({
+        topMore: this.data.topMore
+      })
+    }).catch(err => {
+      console.error(err)
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

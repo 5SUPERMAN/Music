@@ -5,7 +5,7 @@
 <new-music bind:handleplay="handlePlay" bind:handleMore="handleMore" bind:imageload="imageLoad"  title="{{newTitle}}" indexNewMusic="{{indexNewMusic}}" playIndex="{{index}}"/>
 
 <!-- 推荐歌单 -->
-<song-sheet title="{{recommendTitle}}" recommendSong="{{recommendSong}}" bind:handleSheetMore="handleRecommendMore"/>
+<song-sheet title="{{recommendTitle}}" songSheet="{{recommendSong}}" bind:handleSheetMore="handleRecommendMore"/>
 
 <!-- 热门歌单 -->
-<song-sheet title="{{hotTitle}}" recommendSong="{{topSong}}" bind:handleSheetMore="handleTopMore"/>
+<song-sheet title="{{hotTitle}}" songSheet="{{topSong}}" bind:handleSheetMore="handleTopMore"/>
