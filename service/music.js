@@ -15,12 +15,11 @@ export function getRecommendSong(limit) {
   })
 }
 
-export function getTopSong(limit,order) {
+export function getTopSong(limit) {
   return request({
     url: '/top/playlist',
     data: {
-      limit: limit || 6,
-      order: 'hot'
+      limit: limit || 6
     }
   })
 }

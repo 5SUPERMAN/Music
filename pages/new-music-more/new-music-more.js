@@ -25,7 +25,6 @@ Page({
   onLoad: function(options) {
     // this._getNewMusic();
     
-    
     const eventChannel = this.getOpenerEventChannel();
 
     eventChannel.on('newMusicData', data => {
@@ -34,7 +33,6 @@ Page({
         isPlay: data[1],
         playIndex: data[2]
       })
-      flag = true;
     })
   },
   onShow: function() {

@@ -37,7 +37,7 @@ Page({
     this._getTopSong();
 
     this._getNewMusicMore();
-    
+    this._getRecommendSong(30);
   },
   onReady: function() {
     // for (let i = 0; i < this.data.indexNewMusic.length; i++) {
@@ -75,7 +75,7 @@ Page({
     wx.navigateTo({
       url: '/pages/song-sheet-more/song-sheet-more',
       success: res => {
-
+        res.eventChannel.emit('RecommendMoreData',this.data.recommendMore)
       }
     })
   },
@@ -175,9 +175,9 @@ Page({
     })
   },
 
-  _getRecommendSong(id) {
-    if(!id){
-      getRecommendSong(id).then(res => {
+  _getRecommendSong(limit) {
+    if(!limit){
+      getRecommendSong(limit).then(res => {
         const result = res.data.result;
         result.forEach(item => {
           let songSheet = {};
@@ -193,7 +193,7 @@ Page({
         console.error(err)
       })
     }else{
-      getRecommendSong(id).then(res => {
+      getRecommendSong(limit).then(res => {
         const result = res.data.result;
         result.forEach(item => {
           let songSheet = {};

@@ -1,2 +1,9 @@
 <!--pages/song-sheet-more/song-sheet-more.wxml-->
-<text>pages/song-sheet-more/song-sheet-more.wxml</text>
+<view class="recommend-item">
+  <block wx:for="{{songSheetMore}}" wx:key="{{index}}">
+    <view class="song-sheet-item" data-index="{{index}}">
+      <image class="image" src="{{item.image}}" />
+      <text class="name">{{item.songSheetName}}</text>
+    </view>
+  </block>
+</view>
