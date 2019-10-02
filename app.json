@@ -3,7 +3,8 @@
     "pages/index/index",
     "pages/audio/audio",
     "pages/profile/profile",
-    "pages/new-music-more/new-music-more"
+    "pages/new-music-more/new-music-more",
+    "pages/song-sheet-more/song-sheet-more"
   ],
   "requiredBackgroundModes": [
     "audio",

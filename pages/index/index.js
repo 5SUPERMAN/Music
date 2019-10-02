@@ -27,7 +27,9 @@ Page({
     isPlay: false,
     // playIndex: 0,
     recommendSong: [],
-    topSong: []
+    recommendMore: [],
+    topSong: [],
+    topMore: []
   },
   onLoad: function(options) {
     this._getNewMusic();
@@ -35,6 +37,7 @@ Page({
     this._getTopSong();
 
     this._getNewMusicMore();
+    
   },
   onReady: function() {
     // for (let i = 0; i < this.data.indexNewMusic.length; i++) {
@@ -60,8 +63,27 @@ Page({
           })
         }
       },
-      success: (res) => {
+      success: res => {
         res.eventChannel.emit('newMusicData', [this.data.newMusic,this.data.isPlay,this.data.index])
+      },
+      fail: function(err) {
+        console.error(err)
+      }
+    })
+  },
+  handleRecommendMore() {
+    wx.navigateTo({
+      url: '/pages/song-sheet-more/song-sheet-more',
+      success: res => {
+
+      }
+    })
+  },
+  handleTopMore() {
+    wx.navigateTo({
+      url: '/pages/song-sheet-more/song-sheet-more',
+      success: res => {
+
       }
     })
   },
@@ -86,7 +108,7 @@ Page({
 
       this.data.isPlay = false;
     }
-    if (!innerAudioContext.src) {
+    if (!backgroundAudioManager.src) {
       innerAudioContext.src = this.data.indexNewMusic[index].url;
       backgroundAudioManager.src = this.data.indexNewMusic[index].url;
 
@@ -153,22 +175,40 @@ Page({
     })
   },
 
-  _getRecommendSong() {
-    getRecommendSong().then(res => {
-      const result = res.data.result;
-      result.forEach(item => {
-        let songSheet = {};
-        songSheet.songSheetId = item.id;
-        songSheet.songSheetName = item.name;
-        songSheet.image = item.picUrl;
-        this.data.recommendSong.push(songSheet)
-        this.setData({
-          recommendSong: this.data.recommendSong
+  _getRecommendSong(id) {
+    if(!id){
+      getRecommendSong(id).then(res => {
+        const result = res.data.result;
+        result.forEach(item => {
+          let songSheet = {};
+          songSheet.songSheetId = item.id;
+          songSheet.songSheetName = item.name;
+          songSheet.image = item.picUrl;
+          this.data.recommendSong.push(songSheet)
+          this.setData({
+            recommendSong: this.data.recommendSong
+          })
         })
+      }).catch(err => {
+        console.error(err)
       })
-    }).catch(err => {
-      console.error(err)
-    })
+    }else{
+      getRecommendSong(id).then(res => {
+        const result = res.data.result;
+        result.forEach(item => {
+          let songSheet = {};
+          songSheet.songSheetId = item.id;
+          songSheet.songSheetName = item.name;
+          songSheet.image = item.picUrl;
+          this.data.recommendMore.push(songSheet)
+          this.setData({
+            recommendMore: this.data.recommendMore
+          })
+        })
+      }).catch(err => {
+        console.error(err)
+      })
+    }
   },
   _getTopSong() {
     getTopSong().then(res => {
