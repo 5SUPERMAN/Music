@@ -13,8 +13,10 @@ import {
   debounce
 } from "../../utils/debounce.js"
 
-const innerAudioContext = wx.createInnerAudioContext()
-const backgroundAudioManager = wx.getBackgroundAudioManager()
+let innerAudioContext = wx.createInnerAudioContext();
+let backgroundAudioManager = wx.getBackgroundAudioManager();
+
+let app = getApp();
 
 Page({
   data: {
@@ -23,9 +25,7 @@ Page({
     hotTitle: '热门歌单',
     indexNewMusic: [],
     newMusic: [],
-    index: -1,
-    isPlay: false,
-    // playIndex: 0,
+    playIndex: -1,
     recommendSong: [],
     recommendMore: [],
     topSong: [],
@@ -39,6 +39,13 @@ Page({
     this._getNewMusicMore();
     this._getRecommendSong(30);
     this._getTopSong(30);
+
+    
+  },
+  onShow: function() {
+    this.setData({
+      playIndex: app.globalData.playIndex
+    })
   },
   onReady: function() {
     // for (let i = 0; i < this.data.indexNewMusic.length; i++) {
@@ -56,16 +63,8 @@ Page({
   handleMore() {
     wx.navigateTo({
       url: '/pages/new-music-more/new-music-more',
-      events: {
-        someEvent: data => {
-          this.setData({
-            isPlay: data[0],
-            index: data[1]
-          })
-        }
-      },
       success: res => {
-        res.eventChannel.emit('newMusicData', [this.data.newMusic,this.data.isPlay,this.data.index])
+        res.eventChannel.emit('newMusicData', this.data.newMusic)
       },
       fail: function(err) {
         console.error(err)
@@ -96,42 +95,47 @@ Page({
   }, 500),
   handlePlay(e) {
     let index = e.detail.index;
-    if (this.data.index !== index) {
-      this.setData({
-        index: index
-      })
+    if (app.globalData.index !== index) {
+
+      app.globalData.index = index;
+      app.globalData.isPlay = false;
+
       innerAudioContext.src = this.data.indexNewMusic[index].url;
 
       backgroundAudioManager.title = this.data.indexNewMusic[index].songName;
       backgroundAudioManager.coverImgUrl = this.data.indexNewMusic[index].image;
       backgroundAudioManager.singer = this.data.indexNewMusic[index].singer;
       backgroundAudioManager.src = this.data.indexNewMusic[index].url
-
-      this.data.isPlay = false;
     }
-    if (!backgroundAudioManager.src) {
+    if (!(backgroundAudioManager.src === this.data.indexNewMusic[index].url)) {
       innerAudioContext.src = this.data.indexNewMusic[index].url;
       backgroundAudioManager.src = this.data.indexNewMusic[index].url;
 
-      this.data.isPlay = false;
+      app.globalData.isPlay = false;
     }
 
-    if (!this.data.isPlay) {
-      this.setData({
-        isPlay: !this.data.isPlay
-      })
-      // innerAudioContext.play();
+    if (!app.globalData.isPlay) {
       backgroundAudioManager.play();
     } else {
-      this.setData({
-        isPlay: !this.data.isPlay
-      })
-      // innerAudioContext.pause();
       backgroundAudioManager.pause();
-      this.setData({
-        index: -1
-      })
     }
+
+    backgroundAudioManager.onPlay(() => {
+      app.globalData.isPlay = !app.globalData.isPlay;
+      app.globalData.playIndex = index;
+      this.setData({
+        playIndex: app.globalData.playIndex
+      })
+    })
+
+    backgroundAudioManager.onPause(() => {
+      app.globalData.isPlay = !app.globalData.isPlay;
+      app.globalData.playIndex = -1;
+
+      this.setData({
+        playIndex: -1
+      })
+    })
   },
 
   // -----------网络请求-----------
@@ -159,7 +163,7 @@ Page({
   _getNewMusicMore() {
     getNewMusic().then(res => {
       const data = res.data.data;
-      for (let i = 0; i < 50; i++) {
+      for (let i = 0; i < 20; i++) {
         let newMusicItem = {};
         newMusicItem.songId = data[i].id;
         newMusicItem.img = data[i].album.picUrl;

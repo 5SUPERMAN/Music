@@ -4,11 +4,12 @@ import {
   getTopSong
 } from '../../service/music.js'
 
+let app = getApp();
+
 Page({
   data: {
     recommendMore: [],
-    topMore: [],
-    page: 1
+    topMore: []
   },
   onLoad: function(options) {
     const eventChannel = this.getOpenerEventChannel();
@@ -39,16 +40,19 @@ Page({
 
   // -----------网络请求-----------
   _getRecommendSong(limit) {
-    this.setData({
-      page: this.data.page + 1
-    })
+    // this.setData({
+    //   recommendPage: this.data.recommendPage + 1
+    // })
+    app.globalData.recommendPage += 1;
+
     // 方法一：清空原来的数据就不会下面请求完成数据录入就不会有重复
     // this.data.recommendMore = this.data.recommendMore.splice(this.data.recommendMore.length, this.data.recommendMore.length)
 
     // 方法二：推荐使用此方法
+    // 保存上拉加载前的元素个数
     const length = this.data.recommendMore.length
 
-    getRecommendSong((this.data.page * limit)).then(res => {
+    getRecommendSong(app.globalData.recommendPage * limit).then(res => {
       const result = res.data.result;
       let nullRecommendMore = [];
       result.forEach(item => {
@@ -69,16 +73,18 @@ Page({
   },
 
   _getTopSong(limit) {
-    this.setData({
-      page: this.data.page + 1
-    })
+    // this.setData({
+    //   topPage: this.data.topPage + 1
+    // })
+    app.globalData.topPage += 1;
+
     // 方法一：清空原来的数据就不会下面请求完成数据录入就不会有重复
     // this.data.topMore = this.data.topMore.splice(this.data.topMore.length, this.data.topMore.length)
 
     // 方法二：推荐使用此方法
     const length = this.data.topMore.length
 
-    getTopSong(this.data.page * limit).then(res => {
+    getTopSong(app.globalData.topPage * limit).then(res => {
       const playLists = res.data.playlists;
       let nullTopMore = [];
       playLists.forEach(list => {

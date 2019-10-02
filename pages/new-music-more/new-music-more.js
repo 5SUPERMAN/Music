@@ -11,15 +11,13 @@ import {
   debounce
 } from "../../utils/debounce.js"
 
-const innerAudioContext = wx.createInnerAudioContext();
-const backgroundAudioManager = wx.getBackgroundAudioManager();
-let flag = true;
+let innerAudioContext = wx.createInnerAudioContext();
+let backgroundAudioManager = wx.getBackgroundAudioManager();
+let app = getApp();
 
 Page({
   data: {
     newMusic: [],
-    isPlay: false,
-    // 控制播放按钮
     playIndex: -1
   },
   onLoad: function(options) {
@@ -29,13 +27,15 @@ Page({
 
     eventChannel.on('newMusicData', data => {
       this.setData({
-        newMusic: data[0],
-        isPlay: data[1],
-        playIndex: data[2]
+        newMusic: data
       })
     })
   },
   onShow: function() {
+    this.setData({
+      playIndex: app.globalData.playIndex
+    })
+
     setTimeout(() => {
       this.data.newMusic.forEach(list => {
         let id = list.songId;
@@ -44,51 +44,48 @@ Page({
     },500)
   },
 
-  // -----------事件函数-----------
+  // -----------事件处理函数-----------
   handlePlay(e) {
     let index = e.currentTarget.dataset.index;
-    if (this.data.playIndex !== index) {
-      this.setData({
-        playIndex: index
-      })
+    if (app.globalData.index !== index) {
+      app.globalData.index = index;
+      app.globalData.isPlay = false;
+
       innerAudioContext.src = this.data.newMusic[index].url;
       
       backgroundAudioManager.title = this.data.newMusic[index].songName;
       backgroundAudioManager.coverImgUrl = this.data.newMusic[index].image;
       backgroundAudioManager.singer = this.data.newMusic[index].singer;
       backgroundAudioManager.src = this.data.newMusic[index].url;
-
-      this.data.isPlay = false;
     }
-    if (!backgroundAudioManager.src) {
+    if (!(backgroundAudioManager.src === this.data.newMusic[index].url)) {
       innerAudioContext.src = this.data.newMusic[index].url;
       backgroundAudioManager.src = this.data.newMusic[index].url;
 
-      this.data.isPlay = false;
+      app.globalData.isPlay = false;
     }
 
-    if (!this.data.isPlay) {
-      this.setData({
-        isPlay: !this.data.isPlay
-      })
-      // innerAudioContext.play();
+    if (!app.globalData.isPlay) {
       backgroundAudioManager.play();
-      
     } else {
-      this.setData({
-        isPlay: !this.data.isPlay
-      })
-      // innerAudioContext.pause();
       backgroundAudioManager.pause();
+    }
+
+    backgroundAudioManager.onPlay(() => {
+      app.globalData.isPlay = !app.globalData.isPlay;
+      app.globalData.playIndex = index;
+      this.setData({
+        playIndex: app.globalData.playIndex
+      })
+    })
+
+    backgroundAudioManager.onPause(() => {
+      app.globalData.isPlay = !app.globalData.isPlay;
+      app.globalData.playIndex = -1;
       this.setData({
         playIndex: -1
       })
-    }
-
-    if (flag) {
-      const eventChannel = this.getOpenerEventChannel();
-      eventChannel.emit('someEvent', [this.data.isPlay, this.data.playIndex]);
-    }
+    })
   },
   // imageLoad: debounce(function() {
   //   this.data.newMusic.forEach(list => {
