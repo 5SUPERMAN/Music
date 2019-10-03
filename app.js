@@ -3,6 +3,7 @@ App({
     index: -1,
     playIndex: -1,
     isPlay: false,
+    songId: 0,
     recommendPage: 1,
     topPage: 1
   },

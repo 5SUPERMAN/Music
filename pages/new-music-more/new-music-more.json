@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "song-list": "/components/song-list/song-list"
+    "song-list": "/components/song-list/song-list",
+    "loading": "/components/loading/loading"
   },
   "navigationBarTitleText": "新歌推荐"
 }

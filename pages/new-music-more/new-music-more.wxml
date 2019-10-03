@@ -1,2 +1,3 @@
 <!--pages/new-music-more/new-music-more.wxml-->
-<song-list music="{{newMusic}}" />
+<loading wx:if="{{isLoading}}" is-loading="is-loading"/>
+<song-list wx:else music="{{newMusic}}" />

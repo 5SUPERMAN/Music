@@ -5,7 +5,8 @@ import {
 
 Page({
   data: {
-    newMusic: []
+    newMusic: [],
+    isLoading: true
   },
   onLoad: function(options) {
     const eventChannel = this.getOpenerEventChannel();
@@ -17,10 +18,10 @@ Page({
     })
   },
   onShow: function() {
-    wx.showLoading({
-      title: '加载中...',
-      mask: true
-    })
+    // wx.showLoading({
+    //   title: '加载中...',
+    //   mask: true
+    // })
 
     let songIds = []
     this.data.newMusic.forEach(list => {
@@ -42,7 +43,10 @@ Page({
         newMusic: this.data.newMusic
       })
 
-      wx.hideLoading()
+      // wx.hideLoading()
+      this.setData({
+        isLoading: false
+      })
     }).catch(err => {
       console.error(err)
     })

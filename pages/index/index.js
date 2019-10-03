@@ -21,7 +21,7 @@ Page({
     hotTitle: '热门歌单',
     indexNewMusic: [],
     newMusic: [],
-    playIndex: -1,
+    songId: 0,
     recommendSong: [],
     recommendMore: [],
     topSong: [],
@@ -34,11 +34,11 @@ Page({
 
     this._getNewMusicMore();
     this._getRecommendSong(30);
-    this._getTopSong(30); 
+    this._getTopSong(30);
   },
   onShow: function() {
     this.setData({
-      playIndex: app.globalData.playIndex
+      songId: app.globalData.songId
     })
   },
 
@@ -58,7 +58,7 @@ Page({
     wx.navigateTo({
       url: '/pages/song-sheet-more/song-sheet-more',
       success: res => {
-        res.eventChannel.emit('RecommendMoreData',this.data.recommendMore)
+        res.eventChannel.emit('RecommendMoreData', this.data.recommendMore)
       }
     })
   },
@@ -72,10 +72,10 @@ Page({
   },
   handlePlay(e) {
     let index = e.detail.index;
-    if (app.globalData.index !== index) {
-
+    if (app.globalData.songId !== this.data.indexNewMusic[index].songId) {
       app.globalData.index = index;
       app.globalData.isPlay = false;
+      app.globalData.songId = this.data.indexNewMusic[index].songId;
 
       innerAudioContext.src = this.data.indexNewMusic[index].url;
 
@@ -93,25 +93,25 @@ Page({
 
     backgroundAudioManager.onPlay(() => {
       app.globalData.isPlay = !app.globalData.isPlay;
-      app.globalData.playIndex = index;
+      app.globalData.songId = this.data.indexNewMusic[index].songId;
       this.setData({
-        playIndex: app.globalData.playIndex
+        songId: app.globalData.songId
       })
     })
 
     backgroundAudioManager.onPause(() => {
       app.globalData.isPlay = !app.globalData.isPlay;
-      app.globalData.playIndex = -1;
+      app.globalData.songId = 0;
       this.setData({
-        playIndex: -1
+        songId: 0
       })
     })
 
     backgroundAudioManager.onStop(() => {
       app.globalData.isPlay = !app.globalData.isPlay;
-      app.globalData.playIndex = -1;
+      app.globalData.songId = 0;
       this.setData({
-        playIndex: -1
+        songId: 0
       })
     })
   },
@@ -125,8 +125,17 @@ Page({
         newMusicItem.songId = data[i].id;
         newMusicItem.img = data[i].album.picUrl;
         newMusicItem.songName = data[i].name;
-        newMusicItem.singerId = data[i].artists[0].id;
-        newMusicItem.singer = data[i].artists[0].name;
+
+        let artist = {
+          id: [],
+          name: []
+        };
+        data[i].artists.forEach(singers => {
+          artist.id.push(singers.id)
+          artist.name.push(singers.name)
+        })
+        newMusicItem.singerId = artist.id.join(' / ');
+        newMusicItem.singer = artist.name.join(' / ');
 
         this.data.indexNewMusic.push(newMusicItem)
       }
@@ -146,8 +155,18 @@ Page({
         newMusicItem.songId = item.id;
         newMusicItem.img = item.album.picUrl;
         newMusicItem.songName = item.name;
-        newMusicItem.singerId = item.artists[0].id;
-        newMusicItem.singer = item.artists[0].name;
+
+        let artist = {
+          id: [],
+          name: []
+        };
+        item.artists.forEach(singers => {
+          artist.id.push(singers.id)
+          artist.name.push(singers.name)
+        })
+        newMusicItem.singerId = artist.id.join(' / ');
+        newMusicItem.singer = artist.name.join(' / ');
+
         this.data.newMusic.push(newMusicItem)
       })
       this.setData({
@@ -155,22 +174,22 @@ Page({
       })
 
       // 上面请求完成后，根据 id发起获取 url的请求
-      setTimeout(() => {
-        let songIds = []
-        this.data.indexNewMusic.forEach(list => {
-          let id = list.songId;
-          songIds.push(id)
-        })
-        let songId = songIds.join(',')
-        this._getMusicUrl(songId)
-      },200)
+      let songIds = []
+      this.data.indexNewMusic.forEach(list => {
+        let id = list.songId;
+        songIds.push(id)
+      })
+      let songId = songIds.join(',')
+      // 防止上面获取未完成获取 id，就执行下面请求，所以 return
+      return this._getMusicUrl(songId)
     }).catch(err => {
       console.error(err)
     })
   },
 
   _getRecommendSong(limit) {
-    if(!limit){
+    // 判断有没有传参
+    if (!limit) {
       getRecommendSong(limit).then(res => {
         const result = res.data.result;
         result.forEach(item => {
@@ -186,7 +205,7 @@ Page({
       }).catch(err => {
         console.error(err)
       })
-    }else{
+    } else {
       getRecommendSong(limit).then(res => {
         const result = res.data.result;
         result.forEach(item => {
@@ -206,7 +225,8 @@ Page({
   },
 
   _getTopSong(limit) {
-    if(!limit){
+    // 判断有没有传参
+    if (!limit) {
       getTopSong(limit).then(res => {
         const playLists = res.data.playlists;
         playLists.forEach(list => {
@@ -222,7 +242,7 @@ Page({
       }).catch(err => {
         console.error(err)
       })
-    }else{
+    } else {
       getTopSong(limit).then(res => {
         const playLists = res.data.playlists;
         playLists.forEach(list => {

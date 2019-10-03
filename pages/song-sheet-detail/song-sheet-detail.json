@@ -1,5 +1,7 @@
 {
   "usingComponents": {
-    "song-sheet-header": "./childComps/song-sheet-header/song-sheet-header"
+    "song-sheet-header": "./childComps/song-sheet-header/song-sheet-header",
+    "song-list": "/components/song-list/song-list",
+    "loading": "/components/loading/loading"
   }
 }

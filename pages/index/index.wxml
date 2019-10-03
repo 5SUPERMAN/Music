@@ -2,7 +2,7 @@
 <mp-searchbar />
 
 <!-- 新歌推荐 -->
-<new-music bind:handleplay="handlePlay" bind:handleMore="handleMore" bind:imageload="imageLoad"  title="{{newTitle}}" indexNewMusic="{{indexNewMusic}}" playIndex="{{playIndex}}"/>
+<new-music bind:handleplay="handlePlay" bind:handleMore="handleMore" bind:imageload="imageLoad"  title="{{newTitle}}" indexNewMusic="{{indexNewMusic}}" songId="{{songId}}"/>
 
 <!-- 推荐歌单 -->
 <song-sheet title="{{recommendTitle}}" songSheet="{{recommendSong}}" bind:handleSheetMore="handleRecommendMore"/>

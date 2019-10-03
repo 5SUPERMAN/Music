@@ -1,1 +1,4 @@
 /* pages/new-music-more/new-music-more.wxss */
+.is-loading{
+  margin-top: 80rpx;
+}

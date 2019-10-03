@@ -58,9 +58,6 @@ Page({
 
   // -----------网络请求-----------
   _getRecommendSong(limit) {
-    // this.setData({
-    //   recommendPage: this.data.recommendPage + 1
-    // })
     app.globalData.recommendPage += 1;
 
     // 方法一：清空原来的数据就不会下面请求完成数据录入就不会有重复
@@ -83,17 +80,15 @@ Page({
       })
       this.data.recommendMore.push(...nullRecommendMore.slice(length))
       this.setData({
-        recommendMore: this.data.recommendMore
+        recommendMore: this.data.recommendMore,
       })
+
     }).catch(err => {
       console.error(err)
     })
   },
 
   _getTopSong(limit) {
-    // this.setData({
-    //   topPage: this.data.topPage + 1
-    // })
     app.globalData.topPage += 1;
 
     // 方法一：清空原来的数据就不会下面请求完成数据录入就不会有重复

@@ -1,1 +1,4 @@
 /* pages/song-sheet-detail/song-sheet-detail.wxss */
+.is-loading{
+  margin-top: 80rpx;
+}

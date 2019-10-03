@@ -1,2 +1,6 @@
 <!--pages/song-sheet-detail/song-sheet-detail.wxml-->
-<song-sheet-header songSheetHeader="{{songSheetHeader}}" />
+<loading wx:if="{{isLoading}}" is-loading="is-loading" />
+<block wx:else>
+  <song-sheet-header songSheetHeader="{{songSheetHeader}}" />
+  <song-list music="{{songSeetSong}}" />
+</block>

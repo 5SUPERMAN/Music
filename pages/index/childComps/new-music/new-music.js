@@ -12,7 +12,7 @@ Component({
       type: Array,
       value: []
     },
-    playIndex: {
+    songId: {
       type: Number,
       value: -1
     }

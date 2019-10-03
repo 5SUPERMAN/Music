@@ -1,13 +1,13 @@
 /* pages/song-sheet-detail/childComps/song-sheet-header/song-sheet-header.wxss */
 .song-sheet-header{
-  height: 320rpx;
+  height: 360rpx;
   position: relative;
   background-repeat: no-repeat !important;
   background-size: 100% auto !important;
   background-position: center center !important;
 }
 .sheet-header{
-  padding: 70rpx 70rpx;
+  padding: 90rpx 70rpx;
   position: relative;
   z-index: 1;
 }
@@ -21,7 +21,7 @@
 .sheet-name{
   width: 350rpx;
   position: absolute;
-  top: 90rpx;
+  top: 120rpx;
   right: 80rpx;
   color: #fff;
   font-size: 30rpx;
@@ -32,7 +32,7 @@
   position: absolute;
   top: 0;
   width: 100vw;
-  height: 320rpx;
+  height: 360rpx;
   background-color: #000;
   opacity: .4;
 }

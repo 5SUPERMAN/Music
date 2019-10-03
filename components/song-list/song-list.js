@@ -12,19 +12,20 @@ Component({
     }
   },
   data: {
-    playIndex: -1
+    songId: 0
   },
-  attached() {
+  ready: function() {
     this.setData({
-      playIndex: app.globalData.playIndex
+      songId: app.globalData.songId
     })
   },
   methods: {
     handlePlay(e) {
       let index = e.currentTarget.dataset.index;
-      if (app.globalData.index !== index) { // 判断点击的 index与原来播放的 index是否一致
+      if (app.globalData.songId !== this.properties.music[index].songId) { // 判断点击的 index与原来播放的 index是否一致
         app.globalData.index = index;
         app.globalData.isPlay = false;
+        app.globalData.songId = this.properties.music[index].songId;
 
         innerAudioContext.src = this.properties.music[index].url;
 
@@ -42,25 +43,25 @@ Component({
 
       backgroundAudioManager.onPlay(() => {
         app.globalData.isPlay = !app.globalData.isPlay;
-        app.globalData.playIndex = index;
+        app.globalData.songId = this.properties.music[index].songId;
         this.setData({
-          playIndex: app.globalData.playIndex
+          songId: app.globalData.songId
         })
       })
 
       backgroundAudioManager.onPause(() => {
         app.globalData.isPlay = !app.globalData.isPlay;
-        app.globalData.playIndex = -1;
+        app.globalData.songId = 0;
         this.setData({
-          playIndex: -1
+          songId: 0
         })
       })
 
       backgroundAudioManager.onStop(() => {
         app.globalData.isPlay = !app.globalData.isPlay;
-        app.globalData.playIndex = -1;
+        app.globalData.songId = 0;
         this.setData({
-          playIndex: -1
+          songId: 0
         })
       })
     }
