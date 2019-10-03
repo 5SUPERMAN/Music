@@ -1,18 +1,2 @@
 <!--pages/new-music-more/new-music-more.wxml-->
-<view class="new-item">
-  <block wx:for="{{newMusic}}" wx:key="{{index}}">
-    <view class="item-music {{!item.url ? 'prohibit' : ''}}" hover-class="item-music-hover" bind:tap="handlePlay" data-index="{{index}}">
-      <!-- <block>
-          <image wx:if="{{playIndex !== index}}" class="play" src="/assets/icon/play.png" />
-          <image wx:else class="pause" src="/assets/icon/pause.png" />
-      </block>
-      <image class="item-image" src="{{item.img}}" /> -->
-      <text class="index {{playIndex === index ? 'song-name-play' : ''}}">{{index + 1}}</text>
-      <text class="song-name {{playIndex === index ? 'song-name-play' : ''}}">{{item.songName}}</text>
-      <text class="singer {{playIndex === index ? 'song-name-play' : ''}}">{{item.singer}}</text>
-      <image class="icon" src="/assets/icon/arrow.png" />
-
-      <!-- <view hidden="{{item.url}}" class="no-play">暂时无法播放</view> -->
-    </view>
-  </block>
-</view>
+<song-list music="{{newMusic}}" />

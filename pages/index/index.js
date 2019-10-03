@@ -82,13 +82,7 @@ Page({
       backgroundAudioManager.title = this.data.indexNewMusic[index].songName;
       backgroundAudioManager.coverImgUrl = this.data.indexNewMusic[index].image;
       backgroundAudioManager.singer = this.data.indexNewMusic[index].singer;
-      backgroundAudioManager.src = this.data.indexNewMusic[index].url
-    }
-    if (!(backgroundAudioManager.src === this.data.indexNewMusic[index].url)) {
-      innerAudioContext.src = this.data.indexNewMusic[index].url;
       backgroundAudioManager.src = this.data.indexNewMusic[index].url;
-
-      app.globalData.isPlay = false;
     }
 
     if (!app.globalData.isPlay) {

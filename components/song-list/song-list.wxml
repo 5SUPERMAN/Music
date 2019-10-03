@@ -1,0 +1,16 @@
+<!--components/song-list/song-list.wxml-->
+<view class="new-item">
+  <block wx:for="{{music}}" wx:key="{{index}}">
+    <view class="item-music {{!item.url ? 'prohibit' : ''}}" hover-class="item-music-hover" bind:tap="handlePlay" data-index="{{index}}">
+      <!-- <block>
+          <image wx:if="{{playIndex !== index}}" class="play" src="/assets/icon/play.png" />
+          <image wx:else class="pause" src="/assets/icon/pause.png" />
+      </block> -->
+      <!-- <image class="item-image" src="{{item.img}}" lazy-load="true" /> -->
+      <text class="index {{playIndex === index ? 'song-name-play' : ''}}">{{index + 1}}</text>
+      <text class="song-name {{playIndex === index ? 'song-name-play' : ''}}">{{item.songName}}</text>
+      <text class="singer {{playIndex === index ? 'song-name-play' : ''}}">{{item.singer}}</text>
+      <image class="icon" src="/assets/icon/arrow.png" />
+    </view>
+  </block>
+</view>

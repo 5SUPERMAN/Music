@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "song-list": "/components/song-list/song-list"
+  },
   "navigationBarTitleText": "新歌推荐"
 }
