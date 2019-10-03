@@ -1,0 +1,8 @@
+<!--pages/song-sheet-detail/childComps/song-sheet-header/song-sheet-header.wxml-->
+<view class="song-sheet-header" style="background: url({{songSheetHeader.sheetImage}})">
+  <view class="sheet-header">
+    <image class="sheet-image" src="{{songSheetHeader.sheetImage}}" />
+    <text class="sheet-name">{{songSheetHeader.sheetName}}</text>
+  </view>
+  <view class="mask"></view>
+</view>

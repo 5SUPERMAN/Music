@@ -1,0 +1,2 @@
+<!--pages/song-sheet-detail/song-sheet-detail.wxml-->
+<song-sheet-header songSheetHeader="{{songSheetHeader}}" />

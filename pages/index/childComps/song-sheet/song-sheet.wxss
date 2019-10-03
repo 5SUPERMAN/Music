@@ -1,4 +1,7 @@
 /* pages/index/childComps/recommend-song/recommend-song.wxss */
+.song-sheet{
+    margin-top: 30rpx;
+}
 .item-title {
   height: 70rpx;
   line-height: 70rpx;

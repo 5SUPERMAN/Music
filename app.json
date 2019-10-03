@@ -4,7 +4,8 @@
     "pages/audio/audio",
     "pages/profile/profile",
     "pages/new-music-more/new-music-more",
-    "pages/song-sheet-more/song-sheet-more"
+    "pages/song-sheet-more/song-sheet-more",
+    "pages/song-sheet-detail/song-sheet-detail"
   ],
   "requiredBackgroundModes": [
     "audio",

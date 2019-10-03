@@ -9,10 +9,6 @@ import {
   getMusicUrl
 } from '../../service/musicUrl.js'
 
-import {
-  debounce
-} from "../../utils/debounce.js"
-
 let innerAudioContext = wx.createInnerAudioContext();
 let backgroundAudioManager = wx.getBackgroundAudioManager();
 
@@ -38,28 +34,15 @@ Page({
 
     this._getNewMusicMore();
     this._getRecommendSong(30);
-    this._getTopSong(30);
-
-    
+    this._getTopSong(30); 
   },
   onShow: function() {
     this.setData({
       playIndex: app.globalData.playIndex
     })
   },
-  onReady: function() {
-    // for (let i = 0; i < this.data.indexNewMusic.length; i++) {
-    //   const id = this.data.indexNewMusic[i].songId;
-    //   this._getMusicUrl(id)
-    // }
 
-    this.data.indexNewMusic.forEach(item => {
-      const id = item.songId;
-      this._getMusicUrl(id)
-    })
-  },
-
-  // -----------事件函数-----------
+  // -----------事件处理函数-----------
   handleMore() {
     wx.navigateTo({
       url: '/pages/new-music-more/new-music-more',
@@ -87,12 +70,6 @@ Page({
       }
     })
   },
-  imageLoad: debounce(function() {
-    this.data.indexNewMusic.forEach(item => {
-      const id = item.songId;
-      this._getMusicUrl(id)
-    })
-  }, 500),
   handlePlay(e) {
     let index = e.detail.index;
     if (app.globalData.index !== index) {
@@ -170,18 +147,29 @@ Page({
   _getNewMusicMore() {
     getNewMusic().then(res => {
       const data = res.data.data;
-      for (let i = 0; i < 50; i++) {
+      data.forEach(item => {
         let newMusicItem = {};
-        newMusicItem.songId = data[i].id;
-        newMusicItem.img = data[i].album.picUrl;
-        newMusicItem.songName = data[i].name;
-        newMusicItem.singerId = data[i].artists[0].id;
-        newMusicItem.singer = data[i].artists[0].name;
+        newMusicItem.songId = item.id;
+        newMusicItem.img = item.album.picUrl;
+        newMusicItem.songName = item.name;
+        newMusicItem.singerId = item.artists[0].id;
+        newMusicItem.singer = item.artists[0].name;
         this.data.newMusic.push(newMusicItem)
-      }
+      })
       this.setData({
         newMusic: this.data.newMusic
       })
+
+      // 上面请求完成后，根据 id发起获取 url的请求
+      setTimeout(() => {
+        let songIds = []
+        this.data.indexNewMusic.forEach(list => {
+          let id = list.songId;
+          songIds.push(id)
+        })
+        let songId = songIds.join(',')
+        this._getMusicUrl(songId)
+      },200)
     }).catch(err => {
       console.error(err)
     })
@@ -262,7 +250,9 @@ Page({
   _getMusicUrl(id) {
     getMusicUrl(id).then(res => {
       const data = res.data.data;
-      this.data.indexNewMusic.find(item => item.songId === data[0].id).url = data[0].url
+      for (let i = 0; i < this.data.indexNewMusic.length; i++) {
+        this.data.indexNewMusic[i].url = data.find(item => item.id === this.data.indexNewMusic[i].songId).url;
+      }
       this.setData({
         indexNewMusic: this.data.indexNewMusic
       })

@@ -37,6 +37,24 @@ Page({
   },
 
   // -----------事件处理函数-----------
+  handleSheetDetail(e) {
+    let index = e.currentTarget.dataset.index
+    let songSheetId = 0;
+    if(this.data.recommendMore.length !== 0){
+      songSheetId = this.data.recommendMore[index].songSheetId
+    }else{
+      songSheetId = this.data.topMore[index].songSheetId
+    }
+    wx.navigateTo({
+      url: '/pages/song-sheet-detail/song-sheet-detail',
+      success: function (res) {
+        res.eventChannel.emit('songSheetId', songSheetId);
+      },
+      fail: function (err) {
+        console.error(err);
+      }
+    })
+  },
 
   // -----------网络请求-----------
   _getRecommendSong(limit) {

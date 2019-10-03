@@ -27,6 +27,20 @@ Component({
   methods: {
     handleSheetMore() {
       this.triggerEvent('handleSheetMore')
+    },
+    handleSheetDetail(e) {
+      let index = e.currentTarget.dataset.index
+      let songSheetId = this.properties.songSheet[index].songSheetId
+
+      wx.navigateTo({
+        url: '/pages/song-sheet-detail/song-sheet-detail',
+        success: function(res) {
+          res.eventChannel.emit('songSheetId', songSheetId);
+        },
+        fail: function(err) {
+          console.error(err);
+        }
+      })
     }
   }
 })

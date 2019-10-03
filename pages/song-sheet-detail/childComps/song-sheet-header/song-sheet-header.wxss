@@ -1,0 +1,38 @@
+/* pages/song-sheet-detail/childComps/song-sheet-header/song-sheet-header.wxss */
+.song-sheet-header{
+  height: 320rpx;
+  position: relative;
+  background-repeat: no-repeat !important;
+  background-size: 100% auto !important;
+  background-position: center center !important;
+}
+.sheet-header{
+  padding: 70rpx 70rpx;
+  position: relative;
+  z-index: 1;
+}
+.sheet-image{
+  display: block;
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 20rpx;
+  box-shadow: 0 0 50rpx rgba(255, 255, 255, 1)
+}
+.sheet-name{
+  width: 350rpx;
+  position: absolute;
+  top: 90rpx;
+  right: 80rpx;
+  color: #fff;
+  font-size: 30rpx;
+  line-height: 60rpx;
+}
+
+.mask{
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: 320rpx;
+  background-color: #000;
+  opacity: .4;
+}

@@ -5,6 +5,9 @@
   /* 禁止点击 */
   pointer-events: none;
 }
+/* .my-loading{
+  
+} */
 /* .no-play{
   position: absolute;
   font-size: 30rpx;

@@ -35,10 +35,6 @@ Component({
         index
       }, {});
     },
-    imageLoad() {
-      this.triggerEvent('imageload')
-    },
-
     handleMore() {
       this.triggerEvent('handleMore')
     }

@@ -1,8 +1,4 @@
 // pages/new-music-more/new-music-more.js
-// import {
-//   getNewMusic
-// } from "../../service/music.js"
-
 import {
   getMusicUrl
 } from '../../service/musicUrl.js'

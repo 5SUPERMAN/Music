@@ -13,7 +13,7 @@
           <image wx:if="{{playIndex !== index}}" class="play" src="/assets/icon/play.png" />
           <image wx:else class="pause" src="/assets/icon/pause.png" />
         </block>
-        <image class="item-image" src="{{item.img}}" bindload="imageLoad" />
+        <image class="item-image" src="{{item.img}}" />
         <text class="song-name {{playIndex === index ? 'song-name-play' : ''}}">{{item.songName}}</text>
         <text class="singer {{playIndex === index ? 'song-name-play' : ''}}">{{item.singer}}</text>
         <image class="icon" src="/assets/icon/arrow.png" />

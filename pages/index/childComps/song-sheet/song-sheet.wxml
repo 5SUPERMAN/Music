@@ -8,7 +8,7 @@
 
   <view class="sheet-item">
     <block wx:for="{{songSheet}}" wx:key="{{index}}">
-      <view class="song-sheet-item" data-index="{{index}}">
+      <view class="song-sheet-item" data-index="{{index}}" bindtap="handleSheetDetail">
         <image class="image" src="{{item.image}}" />
         <text class="name">{{item.songSheetName}}</text>
       </view>
