@@ -22,7 +22,7 @@ Page({
   },
   onLoad: function(options) {
     // this._getNewMusic();
-    
+
     const eventChannel = this.getOpenerEventChannel();
 
     eventChannel.on('newMusicData', data => {
@@ -36,12 +36,18 @@ Page({
       playIndex: app.globalData.playIndex
     })
 
-    setTimeout(() => {
-      this.data.newMusic.forEach(list => {
-        let id = list.songId;
-        this._getMusicUrl(id)
-      })
-    },500)
+    wx.showLoading({
+      title: '加载中...',
+      mask: true
+    })
+
+    let songIds = []
+    this.data.newMusic.forEach(list => {
+      let id = list.songId;
+      songIds.push(id)
+    })
+    let songId = songIds.join(',')
+    this._getMusicUrl(songId)
   },
 
   // -----------事件处理函数-----------
@@ -52,7 +58,7 @@ Page({
       app.globalData.isPlay = false;
 
       innerAudioContext.src = this.data.newMusic[index].url;
-      
+
       backgroundAudioManager.title = this.data.newMusic[index].songName;
       backgroundAudioManager.coverImgUrl = this.data.newMusic[index].image;
       backgroundAudioManager.singer = this.data.newMusic[index].singer;
@@ -80,6 +86,14 @@ Page({
     })
 
     backgroundAudioManager.onPause(() => {
+      app.globalData.isPlay = !app.globalData.isPlay;
+      app.globalData.playIndex = -1;
+      this.setData({
+        playIndex: -1
+      })
+    })
+
+    backgroundAudioManager.onStop(() => {
       app.globalData.isPlay = !app.globalData.isPlay;
       app.globalData.playIndex = -1;
       this.setData({
@@ -117,10 +131,14 @@ Page({
   _getMusicUrl(id) {
     getMusicUrl(id).then(res => {
       const data = res.data.data;
-      this.data.newMusic.find(item => item.songId === data[0].id).url = data[0].url;
+      for (let i = 0; i < this.data.newMusic.length; i++) {
+        this.data.newMusic[i].url = data.find(item => item.id === this.data.newMusic[i].songId).url;
+      }
       this.setData({
         newMusic: this.data.newMusic
       })
+
+      wx.hideLoading()
     }).catch(err => {
       console.error(err)
     })

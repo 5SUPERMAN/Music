@@ -18,13 +18,13 @@
   float: right;
   font-size: 26rpx;
   color: #515151;
-  padding-right: 34rpx;
+  padding-right: 20rpx;
 }
 
 .icon {
   position: absolute;
   top: 24rpx;
-  right: 32rpx;
+  right: 20rpx;
   width: 26rpx;
   height: 26rpx;
 }
@@ -44,7 +44,7 @@
 .item-music .icon {
   position: absolute;
   top: 54rpx;
-  right: 14rpx;
+  right: 20rpx;
   width: 26rpx;
   height: 26rpx;
 }
@@ -66,6 +66,9 @@
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+.song-name-play{
+  color: #32CD32 !important;
+}
 
 .singer {
   position: absolute;
@@ -73,6 +76,7 @@
   left: 160rpx;
   width: 440rpx;
   font-size: 24rpx;
+  color: #777;
 }
 
 .play, .pause{

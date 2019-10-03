@@ -14,13 +14,13 @@
   float: right;
   font-size: 26rpx;
   color: #515151;
-  padding-right: 34rpx;
+  padding-right: 20rpx;
 }
 
 .icon {
   position: absolute;
   top: 24rpx;
-  right: 32rpx;
+  right: 20rpx;
   width: 26rpx;
   height: 26rpx;
 }

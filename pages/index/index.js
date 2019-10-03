@@ -131,7 +131,14 @@ Page({
     backgroundAudioManager.onPause(() => {
       app.globalData.isPlay = !app.globalData.isPlay;
       app.globalData.playIndex = -1;
+      this.setData({
+        playIndex: -1
+      })
+    })
 
+    backgroundAudioManager.onStop(() => {
+      app.globalData.isPlay = !app.globalData.isPlay;
+      app.globalData.playIndex = -1;
       this.setData({
         playIndex: -1
       })
@@ -163,7 +170,7 @@ Page({
   _getNewMusicMore() {
     getNewMusic().then(res => {
       const data = res.data.data;
-      for (let i = 0; i < 20; i++) {
+      for (let i = 0; i < 50; i++) {
         let newMusicItem = {};
         newMusicItem.songId = data[i].id;
         newMusicItem.img = data[i].album.picUrl;

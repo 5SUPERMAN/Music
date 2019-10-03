@@ -14,8 +14,8 @@
           <image wx:else class="pause" src="/assets/icon/pause.png" />
         </block>
         <image class="item-image" src="{{item.img}}" bindload="imageLoad" />
-        <text class="song-name">{{item.songName}}</text>
-        <text class="singer">{{item.singer}}</text>
+        <text class="song-name {{playIndex === index ? 'song-name-play' : ''}}">{{item.songName}}</text>
+        <text class="singer {{playIndex === index ? 'song-name-play' : ''}}">{{item.singer}}</text>
         <image class="icon" src="/assets/icon/arrow.png" />
       </view>
     </block>
