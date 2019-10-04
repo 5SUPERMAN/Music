@@ -1,7 +1,6 @@
 App({
   globalData: {
-    index: -1,
-    playIndex: -1,
+    playSong: 0,
     isPlay: false,
     songId: 0,
     recommendPage: 1,

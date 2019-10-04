@@ -25,7 +25,8 @@ Page({
     recommendSong: [],
     recommendMore: [],
     topSong: [],
-    topMore: []
+    topMore: [],
+    cacheMusic: []
   },
   onLoad: function(options) {
     this._getNewMusic();
@@ -38,7 +39,7 @@ Page({
   },
   onShow: function() {
     this.setData({
-      songId: app.globalData.songId
+      songId: app.globalData.playSong
     })
   },
 
@@ -83,6 +84,13 @@ Page({
       backgroundAudioManager.coverImgUrl = this.data.indexNewMusic[index].image;
       backgroundAudioManager.singer = this.data.indexNewMusic[index].singer;
       backgroundAudioManager.src = this.data.indexNewMusic[index].url;
+
+      // 缓存歌曲
+      // let cache = wx.getStorageSync(cacheMusic);
+      // console.log(cache)
+
+      // this.data.cacheMusic.push(this.data.indexNewMusic[index])
+      // wx.setStorageSync('cacheMusic', this.data.cacheMusic)
     }
 
     if (!app.globalData.isPlay) {
@@ -94,6 +102,7 @@ Page({
     backgroundAudioManager.onPlay(() => {
       app.globalData.isPlay = !app.globalData.isPlay;
       app.globalData.songId = this.data.indexNewMusic[index].songId;
+      app.globalData.playSong = this.data.indexNewMusic[index].songId;
       this.setData({
         songId: app.globalData.songId
       })
@@ -101,6 +110,7 @@ Page({
 
     backgroundAudioManager.onPause(() => {
       app.globalData.isPlay = !app.globalData.isPlay;
+      app.globalData.playSong = 0;
       this.setData({
         songId: 0
       })
@@ -109,6 +119,7 @@ Page({
     backgroundAudioManager.onStop(() => {
       app.globalData.isPlay = !app.globalData.isPlay;
       app.globalData.songId = 0;
+      app.globalData.playSong = 0;
       this.setData({
         songId: 0
       })
@@ -141,6 +152,16 @@ Page({
       this.setData({
         indexNewMusic: this.data.indexNewMusic
       })
+
+      // 上面请求完成后，根据 id发起获取 url的请求
+      let songIds = []
+      this.data.indexNewMusic.forEach(list => {
+        let id = list.songId;
+        songIds.push(id)
+      })
+      let songId = songIds.join(',')
+      // 防止上面获取未完成获取 id，就执行下面请求，所以 return
+      return this._getMusicUrl(songId)
     }).catch(err => {
       console.error(err)
     })
@@ -171,16 +192,6 @@ Page({
       this.setData({
         newMusic: this.data.newMusic
       })
-
-      // 上面请求完成后，根据 id发起获取 url的请求
-      let songIds = []
-      this.data.indexNewMusic.forEach(list => {
-        let id = list.songId;
-        songIds.push(id)
-      })
-      let songId = songIds.join(',')
-      // 防止上面获取未完成获取 id，就执行下面请求，所以 return
-      return this._getMusicUrl(songId)
     }).catch(err => {
       console.error(err)
     })

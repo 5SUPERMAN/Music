@@ -16,7 +16,7 @@
   width: 180rpx;
   height: 180rpx;
   border-radius: 20rpx;
-  box-shadow: 0 0 50rpx rgba(255, 255, 255, 1)
+  box-shadow: 0 0 50rpx rgb(255, 255, 255)
 }
 .sheet-name{
   width: 350rpx;

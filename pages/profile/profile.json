@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "profile-header": "./childComps/profile-header/profile-header",
+    "song-list": "/components/song-list/song-list"
+  }
 }

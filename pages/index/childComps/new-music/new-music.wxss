@@ -79,7 +79,7 @@
   color: #777;
 }
 
-.play, .pause{
+/* .play, .pause{
   position: absolute;
   top: 50%;
   margin-top: -30rpx;
@@ -89,4 +89,4 @@
   background-color: #fff;
   border-radius: 50%;
   opacity: .8;
-}
+} */

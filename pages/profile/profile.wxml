@@ -1,2 +1,4 @@
 <!--pages/profile/profile.wxml-->
-<text>pages/profile/profile.wxml</text>
+<profile-header />
+
+<song-list  music="{{profileMusic}}" />
