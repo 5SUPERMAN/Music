@@ -51,7 +51,6 @@ Component({
 
       backgroundAudioManager.onPause(() => {
         app.globalData.isPlay = !app.globalData.isPlay;
-        app.globalData.songId = 0;
         this.setData({
           songId: 0
         })
