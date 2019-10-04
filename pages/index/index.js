@@ -73,8 +73,7 @@ Page({
   },
   handlePlay(e) {
     let index = e.detail.index;
-    if (app.globalData.songId !== this.data.indexNewMusic[index].songId) {
-      app.globalData.index = index;
+    if (app.globalData.songId !== this.data.indexNewMusic[index].songId) { // 判断点击的 index与原来播放的 index是否一致
       app.globalData.isPlay = false;
       app.globalData.songId = this.data.indexNewMusic[index].songId;
 
@@ -86,13 +85,20 @@ Page({
       backgroundAudioManager.src = this.data.indexNewMusic[index].url;
 
       // 缓存歌曲
-      // let cache = wx.getStorageSync(cacheMusic);
-      // console.log(cache)
+      let cache = [];
+      if (this.data.cacheMusic.length !== 0){
+        cache = wx.getStorageSync('cacheMusic');
+      }
 
-      // this.data.cacheMusic.push(this.data.indexNewMusic[index])
-      // wx.setStorageSync('cacheMusic', this.data.cacheMusic)
+      let flag = cache.find(song => song.songId === this.data.indexNewMusic[index].songId);
+
+      if(!flag){
+        this.data.cacheMusic.push(this.data.indexNewMusic[index])
+        wx.setStorageSync('cacheMusic', this.data.cacheMusic)
+      }
     }
 
+    // 播放/暂停
     if (!app.globalData.isPlay) {
       backgroundAudioManager.play();
     } else {

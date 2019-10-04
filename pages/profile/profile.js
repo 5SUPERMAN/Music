@@ -3,7 +3,9 @@ Page({
   data: {
     profileMusic: []
   },
-  onLoad: function (options) {
-
+  onShow: function (options) {
+    this.setData({
+      profileMusic: wx.getStorageSync('cacheMusic')
+    })
   }
 })
