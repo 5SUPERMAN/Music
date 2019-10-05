@@ -14,10 +14,22 @@ Component({
   data: {
     songId: 0
   },
-  ready: function() {
-    this.setData({
-      songId: app.globalData.playSong
-    })
+  pageLifetimes: {
+    show: function() {
+      this.setData({
+        songId: app.globalData.playSong
+      })
+
+      wx.getStorage({
+        key: 'cacheMusic',
+        success: res => {
+          app.globalData.cacheMusic = res.data;
+        },
+        fail: function () {
+          return
+        }
+      })
+    }
   },
   methods: {
     handlePlay(e) {
@@ -32,6 +44,20 @@ Component({
         backgroundAudioManager.coverImgUrl = this.properties.music[index].image;
         backgroundAudioManager.singer = this.properties.music[index].singer;
         backgroundAudioManager.src = this.properties.music[index].url;
+
+        // 缓存歌曲
+        let flag = null;
+        if (app.globalData.cacheMusic.length !== 0) {
+          flag = app.globalData.cacheMusic.find(song => song.songId === this.properties.music[index].songId);
+        }
+
+        if (!flag) {
+          app.globalData.cacheMusic.push(this.properties.music[index])
+          wx.setStorage({
+            key: 'cacheMusic',
+            data: app.globalData.cacheMusic
+          })
+        }
       }
 
       if (!app.globalData.isPlay) { // 判断点击播放暂停

@@ -25,8 +25,7 @@ Page({
     recommendSong: [],
     recommendMore: [],
     topSong: [],
-    topMore: [],
-    cacheMusic: []
+    topMore: []
   },
   onLoad: function(options) {
     this._getNewMusic();
@@ -40,6 +39,16 @@ Page({
   onShow: function() {
     this.setData({
       songId: app.globalData.playSong
+    })
+
+    wx.getStorage({
+      key: 'cacheMusic',
+      success: res => {
+        app.globalData.cacheMusic = res.data;
+      },
+      fail: function () {
+        return
+      }
     })
   },
 
@@ -85,16 +94,17 @@ Page({
       backgroundAudioManager.src = this.data.indexNewMusic[index].url;
 
       // 缓存歌曲
-      let cache = [];
-      if (this.data.cacheMusic.length !== 0){
-        cache = wx.getStorageSync('cacheMusic');
+      let flag = null;
+      if (app.globalData.cacheMusic.length !== 0){
+        flag = app.globalData.cacheMusic.find(song => song.songId === this.data.indexNewMusic[index].songId);
       }
 
-      let flag = cache.find(song => song.songId === this.data.indexNewMusic[index].songId);
-
       if(!flag){
-        this.data.cacheMusic.push(this.data.indexNewMusic[index])
-        wx.setStorageSync('cacheMusic', this.data.cacheMusic)
+        app.globalData.cacheMusic.push(this.data.indexNewMusic[index])
+        wx.setStorage({
+          key: 'cacheMusic',
+          data: app.globalData.cacheMusic
+        })
       }
     }
 

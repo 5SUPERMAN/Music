@@ -1,5 +1,6 @@
 App({
   globalData: {
+    cacheMusic: [],
     playSong: 0,
     isPlay: false,
     songId: 0,

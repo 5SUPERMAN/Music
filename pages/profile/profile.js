@@ -1,4 +1,6 @@
 // pages/profile/profile.js
+let app = getApp();
+
 Page({
   data: {
     profileMusic: []
