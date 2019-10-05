@@ -9,10 +9,21 @@ Component({
     music: {
       type: Array,
       value: []
+    },
+    isArrow: {
+      type: Boolean,
+      value: true
     }
   },
   data: {
     songId: 0
+  },
+  lifetimes: {
+    attached: function() {
+      this.setData({
+        songId: app.globalData.playSong
+      })
+    }
   },
   pageLifetimes: {
     show: function() {
@@ -60,10 +71,14 @@ Component({
         }
       }
 
-      if (!app.globalData.isPlay) { // 判断点击播放暂停
+      // 播放/跳转
+      if (app.globalData.songId && !app.globalData.isPlay) {
         backgroundAudioManager.play();
+        app.globalData.audioSong = this.properties.music[index];
       } else {
-        backgroundAudioManager.pause();
+        wx.switchTab({
+          url: '/pages/audio/audio'
+        })
       }
 
       backgroundAudioManager.onPlay(() => {
@@ -94,6 +109,19 @@ Component({
         const pages = getCurrentPages();
         pages[0].onShow();
       })
+    },
+    handleDel(e) {
+      const index = e.currentTarget.dataset.index;
+      app.globalData.cacheMusic.splice(index, 1);
+      wx.setStorage({
+        key: 'cacheMusic',
+        data: app.globalData.cacheMusic
+      })
+
+      backgroundAudioManager.stop();
+
+      const page = getCurrentPages();
+      page[0].onShow();
     }
   }
 })

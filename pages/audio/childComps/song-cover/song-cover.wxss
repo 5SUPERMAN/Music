@@ -1,0 +1,26 @@
+/* pages/audio/childComps/song-cover/song-cover.wxss */
+.song-cover{
+  text-align: center;
+  margin-top: 20rpx;
+  position: relative;
+}
+.cover{
+  display: inline-block;
+  width: 600rpx;
+  height: 600rpx;
+  border-radius: 50%;
+  box-shadow: 0 0 50rpx rgb(50, 205, 50);
+  overflow: hidden;
+}
+
+.play, .stop{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  opacity: .9;
+  position: absolute;
+  top: 50%;
+  margin-top: -50rpx;
+  left: 50%;
+  margin-left: -50rpx;
+}

@@ -1,0 +1,8 @@
+<!--pages/audio/childComps/song-name/song-name.wxml-->
+<view class="song-detail">
+  <block>
+    <view wx:if="{{songName}}" class="song-name">{{songName}}</view>
+    <view wx:else class="song-name">暂无音乐</view>
+  </block>
+  <view class="singer">{{singer}}</view>
+</view>

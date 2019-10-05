@@ -5,7 +5,8 @@ App({
     isPlay: false,
     songId: 0,
     recommendPage: 1,
-    topPage: 1
+    topPage: 1,
+    audioSong: {}
   },
 
   /**

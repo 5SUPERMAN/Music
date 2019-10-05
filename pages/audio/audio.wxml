@@ -1,2 +1,3 @@
 <!--pages/audio/audio.wxml-->
-<text>pages/audio/audio.wxml</text>
+<song-name songName="{{audioSong.songName}}" singer="{{audioSong.singer}}" />
+<song-cover />

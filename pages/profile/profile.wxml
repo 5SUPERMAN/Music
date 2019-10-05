@@ -1,4 +1,4 @@
 <!--pages/profile/profile.wxml-->
 <profile-header />
 
-<song-list  music="{{profileMusic}}" />
+<song-list  music="{{profileMusic}}" isArrow="{{isClose}}" />

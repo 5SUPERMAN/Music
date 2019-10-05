@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "song-name": "./childComps/song-name/song-name",
+    "song-cover": "./childComps/song-cover/song-cover"
+  }
 }

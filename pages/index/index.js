@@ -108,11 +108,14 @@ Page({
       }
     }
 
-    // 播放/暂停
-    if (!app.globalData.isPlay) {
+    // 播放/跳转
+    if (app.globalData.songId && !app.globalData.isPlay) {
       backgroundAudioManager.play();
+      app.globalData.audioSong = this.data.indexNewMusic[index];
     } else {
-      backgroundAudioManager.pause();
+      wx.switchTab({
+        url: '/pages/audio/audio'
+      })
     }
 
     backgroundAudioManager.onPlay(() => {

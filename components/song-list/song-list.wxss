@@ -1,6 +1,7 @@
 /* components/song-list/song-list.wxss */
-.prohibit{
-  opacity: .3;
+
+.prohibit {
+  opacity: 0.3;
   background-color: #eee;
   /* 禁止点击 */
   pointer-events: none;
@@ -12,7 +13,8 @@
   border-bottom: 1px solid #eee;
   position: relative;
 }
-.item-music-hover{
+
+.item-music-hover {
   background-color: #eee;
 }
 
@@ -22,6 +24,8 @@
   right: 14rpx;
   width: 26rpx;
   height: 26rpx;
+  padding-right: 34rpx;
+  z-index: 99;
 }
 
 /* .item-image {
@@ -31,7 +35,7 @@
   display: block;
 } */
 
-.index{
+.index {
   line-height: 108rpx;
   padding-left: 34rpx;
   font-size: 30rpx;
@@ -47,8 +51,9 @@
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-.song-name-play{
-  color: #32CD32 !important;
+
+.song-name-play {
+  color: #32cd32 !important;
 }
 
 .singer {
@@ -58,6 +63,9 @@
   width: 440rpx;
   font-size: 24rpx;
   color: #777;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 /* .play, .pause{

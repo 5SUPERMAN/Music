@@ -1,0 +1,13 @@
+/* pages/audio/childComps/song-name/song-name.wxss */
+.song-detail{
+  padding: 80rpx 0 20rpx 0;
+  height: 200rpx;
+}
+.song-name{
+  text-align: center;
+}
+.singer{
+  text-align: center;
+  font-size: 28rpx;
+  padding-top: 30rpx;
+}

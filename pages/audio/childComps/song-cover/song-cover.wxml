@@ -1,0 +1,14 @@
+<!--pages/audio/childComps/song-cover/song-cover.wxml-->
+<view class="song-cover">
+  <block>
+    <image wx:if="{{song.cover}}" class="cover" src="{{song.cover}}" />
+    <view wx:else class="cover">
+      <open-data type="userAvatarUrl"></open-data>
+    </view>
+  </block>
+
+  <block>
+    <image wx:if="{{!isPlay}}" class="play" src="/assets/icon/play.png" bind:tap="handlePlay" />
+    <image wx:else class="stop" src="/assets/icon/pause.png" bind:tap="handlePlay" />
+  </block>
+</view>

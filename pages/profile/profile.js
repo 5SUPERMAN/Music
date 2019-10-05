@@ -3,7 +3,8 @@ let app = getApp();
 
 Page({
   data: {
-    profileMusic: []
+    profileMusic: [],
+    isClose: false
   },
   onShow: function (options) {
     this.setData({
