@@ -4,5 +4,4 @@
   <song-cover song="{{audioSong}}" />
 
   <view class="mask"></view>
-  <open-data wx:if="{{!audioSong.songId}}" class="bgi" type="userAvatarUrl"></open-data>
 </view>

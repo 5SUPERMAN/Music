@@ -113,8 +113,8 @@ Page({
       backgroundAudioManager.play();
       app.globalData.audioSong = this.data.indexNewMusic[index];
     } else {
-      wx.switchTab({
-        url: '/pages/audio/audio'
+      wx.navigateTo({
+        url: '/pages/audio-02/audio-02'
       })
     }
 
@@ -124,6 +124,10 @@ Page({
       app.globalData.playSong = this.data.indexNewMusic[index].songId;
       this.setData({
         songId: app.globalData.songId
+      })
+
+      wx.navigateTo({
+        url: '/pages/audio-02/audio-02'
       })
     })
 
@@ -141,6 +145,16 @@ Page({
       app.globalData.playSong = 0;
       this.setData({
         songId: 0
+      })
+    })
+
+    backgroundAudioManager.onEnded(() => {
+      app.globalData.isPlay = !app.globalData.isPlay;
+      app.globalData.songId = 0;
+      app.globalData.playSong = 0;
+
+      this.setData({
+        isPlay: app.globalData.isPlay
       })
     })
   },

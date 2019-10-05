@@ -1,10 +1,13 @@
 /* pages/audio/childComps/song-cover/song-cover.wxss */
-.song-cover{
+
+.song-cover {
   text-align: center;
   margin-top: 20rpx;
   position: relative;
+  z-index: 999;
 }
-.cover{
+
+.cover {
   display: inline-block;
   width: 600rpx;
   height: 600rpx;
@@ -13,14 +16,32 @@
   overflow: hidden;
 }
 
-.play, .stop{
+.play, .stop {
   width: 100rpx;
   height: 100rpx;
   border-radius: 50%;
-  opacity: .9;
+  opacity: 0.9;
   position: absolute;
   top: 50%;
   margin-top: -50rpx;
   left: 50%;
   margin-left: -50rpx;
+}
+
+.rotate {
+  animation: my-rotate 50s linear infinite;
+}
+
+@keyframes my-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(-180deg);
+  }
+
+  100% {
+    transform: rotate(-360deg);
+  }
 }

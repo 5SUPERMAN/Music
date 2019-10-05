@@ -1,7 +1,10 @@
 /* pages/audio/childComps/song-name/song-name.wxss */
 .song-detail{
+  position: relative;
   padding: 80rpx 0 20rpx 0;
   height: 200rpx;
+  color: #fff;
+  z-index: 999;
 }
 .song-name{
   text-align: center;

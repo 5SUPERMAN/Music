@@ -76,8 +76,8 @@ Component({
         backgroundAudioManager.play();
         app.globalData.audioSong = this.properties.music[index];
       } else {
-        wx.switchTab({
-          url: '/pages/audio/audio'
+        wx.navigateTo({
+          url: '/pages/audio-02/audio-02'
         })
       }
 
@@ -87,6 +87,10 @@ Component({
         app.globalData.playSong = this.properties.music[index].songId;
         this.setData({
           songId: app.globalData.playSong
+        })
+
+        wx.navigateTo({
+          url: '/pages/audio-02/audio-02'
         })
       })
 
@@ -109,6 +113,16 @@ Component({
         const pages = getCurrentPages();
         pages[0].onShow();
       })
+
+      backgroundAudioManager.onEnded(() => {
+        app.globalData.isPlay = !app.globalData.isPlay;
+        app.globalData.songId = 0;
+        app.globalData.playSong = 0;
+
+        this.setData({
+          isPlay: app.globalData.isPlay
+        })
+      })
     },
     handleDel(e) {
       const index = e.currentTarget.dataset.index;
@@ -117,8 +131,6 @@ Component({
         key: 'cacheMusic',
         data: app.globalData.cacheMusic
       })
-
-      backgroundAudioManager.stop();
 
       const page = getCurrentPages();
       page[0].onShow();

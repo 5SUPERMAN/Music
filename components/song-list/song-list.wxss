@@ -20,14 +20,24 @@
 
 .item-music .icon {
   position: absolute;
-  top: 54rpx;
+  top: 50%;
+  margin-top: -13rpx;
   right: 14rpx;
   width: 26rpx;
   height: 26rpx;
   padding-right: 34rpx;
   z-index: 99;
 }
-
+.item-music .icon-close{
+  position: absolute;
+  top: 50%;
+  margin-top: -20rpx;
+  right: 14rpx;
+  width: 40rpx;
+  height: 40rpx;
+  padding-right: 34rpx;
+  z-index: 99;
+}
 /* .item-image {
   border-radius: 20rpx;
   width: 120rpx;

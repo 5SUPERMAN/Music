@@ -14,8 +14,8 @@
       <block>
         <image wx:if="{{isArrow}}" class="icon" src="/assets/icon/arrow.png" />
         <block wx:else>
-          <image wx:if="{{songId !== item.songId}}" class="icon" src="/assets/icon/close.png" catch:tap="handleDel" data-songId="{{item.songId}}" data-index="{{index}}" />
-          <image wx:else class="icon" src="/assets/icon/close_active.png" catch:tap="handleDel" data-songId="{{item.songId}}" data-index="{{index}}" />
+          <image wx:if="{{songId !== item.songId}}" class="icon-close" src="/assets/icon/close.png" catch:tap="handleDel" data-songId="{{item.songId}}" data-index="{{index}}" />
+          <image wx:else class="icon-close" src="/assets/icon/close_active.png" catch:tap="handleDel" data-songId="{{item.songId}}" data-index="{{index}}" />
         </block>
       </block>
     </view>
