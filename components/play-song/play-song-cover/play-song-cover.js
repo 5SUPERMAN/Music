@@ -1,5 +1,6 @@
 // pages/audio/childComps/song-cover/song-cover.js
 let app = getApp();
+let innerAudioContext = wx.createInnerAudioContext();
 let backgroundAudioManager = wx.getBackgroundAudioManager();
 
 Component({
@@ -27,9 +28,6 @@ Component({
       this.setData({
         isPlay: app.globalData.isPlay
       })
-      // if (this.properties.song.songId) {
-      //   backgroundAudioManager.play();
-      // }
     }
   },
   methods: {
@@ -72,37 +70,20 @@ Component({
       })
 
       backgroundAudioManager.onEnded(() => {
-        app.globalData.isPlay = !app.globalData.isPlay;
-        app.globalData.songId = 0;
-        app.globalData.playSong = 0;
-        this.setData({
-          isPlay: app.globalData.isPlay
-        })
-
         wx.getStorage({
           key: 'cacheMusic',
           success: res => {
-            let index = 0
+            let newIndex = 0
             for (let i = 0; i < res.data.length; i++) {
-              if (res.data[i].songId === this.properties.song.songId) {
-                index = i;
+              if (res.data[i].songId === app.globalData.audioSong.songId) {
+                newIndex = i;
                 break;
               }
             }
-            if ((res.data.length - 1) !== index) {
-              this.properties.song = res.data[index + 1];
-              const page = getCurrentPages();
-              app.globalData.audioSong = res.data[index + 1];
-              page[page.length - 1].data.audioSong = res.data[index + 1];
-              app.globalData.isPlay = !app.globalData.isPlay;
-              app.globalData.songId = this.properties.song.songId;
-              app.globalData.playSong = this.properties.song.songId;
-
-              this.setData({
-                isPlay: app.globalData.isPlay
-              })
-
-              backgroundAudioManager.play();
+            if ((res.data.length - 1) !== newIndex) {
+              this.orderPlay(res, newIndex + 1)
+            }else{
+              this.orderPlay(res);
             }
           },
           fail: function(err) {
@@ -110,6 +91,35 @@ Component({
           }
         })
       })
+    },
+
+    // 顺序播放
+    orderPlay(res, index) {
+      index = index || 0;
+      this.properties.song = res.data[index];
+      const page = getCurrentPages();
+      page[page.length - 1].setData({
+        audioSong: res.data[index]
+      })
+      app.globalData.audioSong = res.data[index];
+
+      app.globalData.isPlay = !app.globalData.isPlay;
+      app.globalData.songId = this.properties.song.songId;
+      app.globalData.playSong = this.properties.song.songId;
+
+      this.setData({
+        isPlay: app.globalData.isPlay
+      })
+
+      innerAudioContext.src = this.properties.song.url;
+      backgroundAudioManager.title = this.properties.song.songName;
+      backgroundAudioManager.coverImgUrl = this.properties.song.image;
+      backgroundAudioManager.singer = this.properties.song.singer;
+      backgroundAudioManager.src = this.properties.song.url;
+
+      page[page.length - 1].onLoad();
+
+      backgroundAudioManager.play();
     }
   }
 })

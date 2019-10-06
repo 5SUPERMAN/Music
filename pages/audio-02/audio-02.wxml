@@ -1,7 +1,8 @@
 <!--pages/audio/audio.wxml-->
-<view class="audio" style="background: url({{audioSong.img}})">
+<view class="audio" style="background: url({{audioSong.image}})">
   <song-name songName="{{audioSong.songName}}" singer="{{audioSong.singer}}" />
   <song-cover song="{{audioSong}}" />
+  <song-lyric songId="{{audioSong.songId}}" />
 
   <view class="mask"></view>
 </view>

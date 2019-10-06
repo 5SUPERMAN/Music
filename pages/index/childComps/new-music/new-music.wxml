@@ -13,7 +13,7 @@
           <image wx:if="{{songId !== item.songId}}" class="play" src="/assets/icon/play.png" />
           <image wx:else class="pause" src="/assets/icon/pause.png" />
         </block> -->
-        <image class="item-image" src="{{item.img}}" />
+        <image class="item-image" src="{{item.image}}" />
         <text class="song-name {{songId === item.songId ? 'song-name-play' : ''}}">{{item.songName}}</text>
         <text class="singer {{songId === item.songId ? 'song-name-play' : ''}}">{{item.singer}}</text>
         <image class="icon" src="/assets/icon/arrow.png" />

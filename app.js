@@ -1,12 +1,12 @@
 App({
   globalData: {
-    cacheMusic: [],
-    playSong: 0,
-    isPlay: false,
-    songId: 0,
+    cacheMusic: [], // 缓存的歌
+    playSong: 0, // 存放选中的歌曲 id
+    isPlay: false, // 判断歌曲是否为播放状态
+    songId: 0, // 播放的歌曲与被点击歌曲的 id是否一致
     recommendPage: 1,
     topPage: 1,
-    audioSong: {}
+    audioSong: {} // 存放正在播放的歌曲
   },
 
   /**

@@ -63,7 +63,7 @@ Page({
       data.forEach(song => {
         let musicItem = {};
         musicItem.songId = song.id;
-        musicItem.img = song.al.picUrl;
+        musicItem.image = song.al.picUrl;
         musicItem.songName = song.name;
 
         let artist = {

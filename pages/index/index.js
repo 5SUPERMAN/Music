@@ -11,7 +11,6 @@ import {
 
 let innerAudioContext = wx.createInnerAudioContext();
 let backgroundAudioManager = wx.getBackgroundAudioManager();
-
 let app = getApp();
 
 Page({
@@ -110,15 +109,8 @@ Page({
 
     // 播放/跳转
     if (app.globalData.songId && !app.globalData.isPlay) {
-      backgroundAudioManager.play();
       app.globalData.audioSong = this.data.indexNewMusic[index];
-    } else {
-      wx.navigateTo({
-        url: '/pages/audio-02/audio-02'
-      })
-    }
 
-    backgroundAudioManager.onPlay(() => {
       app.globalData.isPlay = !app.globalData.isPlay;
       app.globalData.songId = this.data.indexNewMusic[index].songId;
       app.globalData.playSong = this.data.indexNewMusic[index].songId;
@@ -129,6 +121,23 @@ Page({
       wx.navigateTo({
         url: '/pages/audio-02/audio-02'
       })
+    } else {
+      wx.navigateTo({
+        url: '/pages/audio-02/audio-02'
+      })
+    }
+
+    backgroundAudioManager.onPlay(() => {
+      // app.globalData.isPlay = !app.globalData.isPlay;
+      // app.globalData.songId = this.data.indexNewMusic[index].songId;
+      // app.globalData.playSong = this.data.indexNewMusic[index].songId;
+      // this.setData({
+      //   songId: app.globalData.songId
+      // })
+
+      // wx.navigateTo({
+      //   url: '/pages/audio-02/audio-02'
+      // })
     })
 
     backgroundAudioManager.onPause(() => {
@@ -149,14 +158,50 @@ Page({
     })
 
     backgroundAudioManager.onEnded(() => {
-      app.globalData.isPlay = !app.globalData.isPlay;
-      app.globalData.songId = 0;
-      app.globalData.playSong = 0;
-
-      this.setData({
-        isPlay: app.globalData.isPlay
+      wx.getStorage({
+        key: 'cacheMusic',
+        success: res => {
+          let newIndex = 0
+          for (let i = 0; i < res.data.length; i++) {
+            if (res.data[i].songId === app.globalData.audioSong.songId) {
+              newIndex = i;
+              break;
+            }
+          }
+          if ((res.data.length - 1) !== newIndex) {
+            this.orderPlay(res, newIndex + 1);
+          } else {
+            this.orderPlay(res);
+          }
+        },
+        fail: function (err) {
+          console.error(err)
+        }
       })
     })
+  },
+  // 顺序播放
+  orderPlay(res, index) {
+    index = index || 0;
+    app.globalData.audioSong = res.data[index];
+
+    app.globalData.isPlay = !app.globalData.isPlay;
+    app.globalData.songId = res.data[index].songId;
+    app.globalData.playSong = res.data[index].songId;
+    this.setData({
+      songId: app.globalData.playSong
+    })
+
+    innerAudioContext.src = res.data[index].url;
+    backgroundAudioManager.title = res.data[index].songName;
+    backgroundAudioManager.coverImgUrl = res.data[index].image;
+    backgroundAudioManager.singer = res.data[index].singer;
+    backgroundAudioManager.src = res.data[index].url;
+
+    const page = getCurrentPages();
+    page[page.length - 1].onShow();
+
+    backgroundAudioManager.play();
   },
 
   // -----------网络请求-----------
@@ -166,7 +211,7 @@ Page({
       for (let i = 0; i < 5; i++) {
         let newMusicItem = {};
         newMusicItem.songId = data[i].id;
-        newMusicItem.img = data[i].album.picUrl;
+        newMusicItem.image = data[i].album.picUrl;
         newMusicItem.songName = data[i].name;
 
         let artist = {
@@ -206,7 +251,7 @@ Page({
       data.forEach(item => {
         let newMusicItem = {};
         newMusicItem.songId = item.id;
-        newMusicItem.img = item.album.picUrl;
+        newMusicItem.image = item.album.picUrl;
         newMusicItem.songName = item.name;
 
         let artist = {

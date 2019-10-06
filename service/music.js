@@ -36,3 +36,13 @@ export function getSongDetails(ids) {
     }
   })
 }
+
+// 歌词
+export function getLyric(id) {
+  return request({
+    url: '/lyric',
+    data: {
+      id
+    }
+  })
+}

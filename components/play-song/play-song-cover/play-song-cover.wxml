@@ -1,7 +1,7 @@
 <!--pages/audio/childComps/song-cover/song-cover.wxml-->
 <view class="song-cover">
   <block>
-    <image wx:if="{{song.img}}" class="cover {{isPlay ? 'rotate' : ''}}" src="{{song.img}}" />
+    <image wx:if="{{song.image}}" class="cover {{isPlay ? 'rotate' : ''}}" src="{{song.image}}" />
     <view wx:else class="cover">
       <open-data type="userAvatarUrl"></open-data>
     </view>
