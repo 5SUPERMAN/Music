@@ -1,5 +1,5 @@
 <!--pages/audio/childComps/song-cover/song-cover.wxml-->
-<view class="song-cover">
+<view class="song-cover {{isOpacity ? 'is-opacity' : ''}}">
   <block>
     <image wx:if="{{song.image}}" class="cover {{isPlay ? 'rotate' : ''}}" src="{{song.image}}" />
     <view wx:else class="cover">
@@ -8,7 +8,7 @@
   </block>
 
   <block>
-    <image wx:if="{{!isPlay}}" class="play" src="/assets/icon/play.png" bind:tap="handlePlay" />
-    <image wx:else class="stop" src="/assets/icon/pause.png" bind:tap="handlePlay" />
+    <image wx:if="{{!isPlay}}" class="play" src="/assets/icon/play.png" catch:tap="handlePlay" />
+    <image wx:else class="stop" src="/assets/icon/pause.png" catch:tap="handlePlay" />
   </block>
 </view>

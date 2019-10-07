@@ -125,6 +125,8 @@ Component({
       })
 
       backgroundAudioManager.onEnded(() => {
+        app.globalData.time = 0;
+        
         wx.getStorage({
           key: 'cacheMusic',
           success: res => {

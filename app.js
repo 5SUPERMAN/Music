@@ -6,7 +6,9 @@ App({
     songId: 0, // 播放的歌曲与被点击歌曲的 id是否一致
     recommendPage: 1,
     topPage: 1,
-    audioSong: {} // 存放正在播放的歌曲
+    audioSong: {}, // 存放正在播放的歌曲
+    time: 0, // 控制歌词滚动
+    lastSongId: 0
   },
 
   /**

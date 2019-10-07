@@ -4,7 +4,8 @@
   text-align: center;
   margin-top: 20rpx;
   position: relative;
-  z-index: 999;
+  z-index: 99;
+  opacity: 0;
 }
 
 .cover {
@@ -26,7 +27,22 @@
   margin-top: -50rpx;
   left: 50%;
   margin-left: -50rpx;
+  z-index: 999;
 }
+.is-opacity{
+  opacity: 1;
+  z-index: 999;
+  /* animation: my-opacity 1s ease-in 1; */
+}
+/* @keyframes my-opacity{
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+} */
 
 .rotate {
   animation: my-rotate 50s linear infinite;

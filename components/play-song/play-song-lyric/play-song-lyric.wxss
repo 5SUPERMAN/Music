@@ -1,1 +1,31 @@
 /* components/play-song/play-song-lyric/play-song-lyric.wxss */
+::-webkit-scrollbar{
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+.lyrices{
+  position: absolute;
+  z-index: 99;
+  text-align: center;
+  color: #fff;
+  font-size: 30rpx;
+  height: 630rpx;
+  top: 330rpx;
+  opacity: 0;
+  /* overflow: hidden; */
+}
+
+.lyric{
+  padding: 0 20rpx;
+  height: 90rpx;
+}
+
+.highlight{
+  color: #32cd32;
+}
+
+.is-opacity{
+  opacity: 1;
+  z-index: 999;
+}

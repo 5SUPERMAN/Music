@@ -1,4 +1,6 @@
 <!--components/play-song/play-song-lyric/play-song-lyric.wxml-->
-<view class="lyric">
-  
-</view>
+<scroll-view class="lyrices {{!isOpacity ? 'is-opacity' : ''}}" scroll-y="true" scroll-top="{{scrollTop}}" scroll-with-animation="true">
+  <block wx:for="{{lyric}}" wx:key="{{index}}">
+    <view class="lyric {{currentIndex === index ? 'highlight' : ''}}" data-index="{{index}}">{{item.content}}</view>
+  </block>
+</scroll-view>
