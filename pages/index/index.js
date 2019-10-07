@@ -1,9 +1,12 @@
 // pages/index/index.js
 import {
-  getNewMusic,
+  getNewMusic
+} from '../../service/music.js'
+
+import {
   getRecommendSong,
   getTopSong
-} from '../../service/music.js'
+} from '../../service/songSheetDetail.js'
 
 import {
   getMusicUrl

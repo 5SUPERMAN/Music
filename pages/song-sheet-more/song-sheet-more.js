@@ -2,7 +2,7 @@
 import {
   getRecommendSong,
   getTopSong
-} from '../../service/music.js'
+} from '../../service/songSheetDetail.js'
 
 let app = getApp();
 

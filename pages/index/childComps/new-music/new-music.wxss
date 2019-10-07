@@ -1,6 +1,5 @@
 /* pages/index/childComps/new-music/new-music.wxss */
 .new-music{
-  padding-top: 50px;
   margin-bottom: 30rpx;
 }
 .item-title {

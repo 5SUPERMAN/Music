@@ -1,5 +1,6 @@
 <!--pages/index/index.wxml-->
-<mp-searchbar />
+<!-- 搜索 -->
+<search-bar />
 
 <!-- 新歌推荐 -->
 <new-music bind:handleplay="handlePlay" bind:handleMore="handleMore" bind:imageload="imageLoad"  title="{{newTitle}}" indexNewMusic="{{indexNewMusic}}" songId="{{songId}}"/>

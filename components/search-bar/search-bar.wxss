@@ -1,0 +1,21 @@
+/* components/search-bar/search-bar.wxss */
+.search-bar{
+  position: relative;
+}
+.search-input{
+  margin: 20rpx;
+  height: 50rpx;
+  background-color: rgb(247, 244, 244);
+  color: #515151;
+  font-size: 30rpx;
+  padding: 4rpx 80rpx;
+  border-radius: 28rpx;
+}
+.search{
+  position: absolute;
+  top: 50%;
+  margin-top: -18rpx; 
+  left: 44rpx;
+  width: 36rpx;
+  height: 36rpx;
+}

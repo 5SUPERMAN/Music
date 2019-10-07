@@ -6,7 +6,8 @@
     "pages/profile/profile",
     "pages/new-music-more/new-music-more",
     "pages/song-sheet-more/song-sheet-more",
-    "pages/song-sheet-detail/song-sheet-detail"
+    "pages/song-sheet-detail/song-sheet-detail",
+    "pages/search-detail/search-detail"
   ],
   "requiredBackgroundModes": [
     "audio",
