@@ -30,7 +30,7 @@ Component({
       backgroundAudioManager.onTimeUpdate(() => {
         app.globalData.time += 0.25;
 
-        for (let i = 0; i < this.data.lyric.length; i++) {
+        for (let i = 0; i < this.data.lyric.length - 1; i++) {
           if (
             this.data.currentIndex !== i &&
             (i < this.data.lyric.length - 1 &&
@@ -47,16 +47,14 @@ Component({
               })
             }
 
-          }else{
-            this.setData({
-              currentIndex: this.data.lyric.length - 1
-            })
           }
         }
       })
 
       backgroundAudioManager.onEnded(() => {
-        app.globalData.time = 0;
+        setTimeout(() => {
+          app.globalData.time = 0;
+        },250)
         this.setData({
           scrollTop: 0
         })
@@ -110,6 +108,7 @@ Component({
 
       page[page.length - 1].onLoad();
 
+      app.globalData.lastSongId = app.globalData.audioSong.songId;
       this._getLyric(this.properties.songId);
 
       backgroundAudioManager.play();
@@ -144,6 +143,7 @@ Component({
           this.data.lyric.forEach((item, index, arr) => {
             if (item.content === "") arr.splice(index, 1)
           })
+          this.data.lyric.push({time: Number.MAX_VALUE, content: ""})
           this.setData({
             lyric: this.data.lyric
           })

@@ -25,7 +25,8 @@ Component({
 
       if (app.globalData.audioSong.songId !== app.globalData.lastSongId) {
         app.globalData.lastSongId = app.globalData.audioSong.songId;
-        this.properties.song.songId = app.globalData.audioSong.songId
+        this.properties.song.songId = app.globalData.audioSong.songId;
+        app.globalData.time = 0;
       }
 
       if (app.globalData.time === 0 && app.globalData.audioSong.songId) {
@@ -77,7 +78,9 @@ Component({
       })
 
       backgroundAudioManager.onStop(() => {
-        app.globalData.time = 0;
+        setTimeout(() => {
+          app.globalData.time = 0;
+        },250)
 
         app.globalData.isPlay = !app.globalData.isPlay;
         app.globalData.songId = 0
