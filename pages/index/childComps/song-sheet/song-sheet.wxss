@@ -1,4 +1,6 @@
 /* pages/index/childComps/recommend-song/recommend-song.wxss */
+@import "/assets/wxss/iconfont.wxss";
+
 /* .song-sheet{
     margin-top: 30rpx;
 } */
@@ -17,15 +19,18 @@
   float: right;
   font-size: 26rpx;
   color: #515151;
-  padding-right: 20rpx;
 }
 
-.icon {
+/* .icon {
   position: absolute;
   top: 24rpx;
   right: 20rpx;
   width: 26rpx;
   height: 26rpx;
+} */
+.iconfont {
+  float: right;
+  font-size: 22rpx;
 }
 
 .sheet-item{

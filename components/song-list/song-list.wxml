@@ -12,11 +12,9 @@
       <text class="singer {{songId === item.songId ? 'song-name-play' : ''}}">{{item.singer}}</text>
       <!-- <image class="icon" src="/assets/icon/arrow.png" /> -->
       <block>
-        <image wx:if="{{isArrow}}" class="icon" src="/assets/icon/arrow.png" />
-        <block wx:else>
-          <image wx:if="{{songId !== item.songId}}" class="icon-close" src="/assets/icon/close.png" catch:tap="handleDel" data-songId="{{item.songId}}" data-index="{{index}}" />
-          <image wx:else class="icon-close" src="/assets/icon/close_active.png" catch:tap="handleDel" data-songId="{{item.songId}}" data-index="{{index}}" />
-        </block>
+        <view wx:if="{{isArrow}}" class="icon iconfont icon-arrow"></view>
+        <!-- <image wx:if="{{isArrow}}" class="icon" src="/assets/icon/arrow.png" /> -->
+        <view wx:else class="close {{songId === item.songId ? 'song-name-play' : ''}} iconfont icon-close" catch:tap="handleDel" data-songId="{{item.songId}}" data-index="{{index}}"></view>
       </block>
     </view>
   </block>

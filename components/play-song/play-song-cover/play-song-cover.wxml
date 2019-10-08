@@ -8,7 +8,10 @@
   </block>
 
   <block>
-    <image wx:if="{{!isPlay}}" class="play" src="/assets/icon/play.png" catch:tap="handlePlay" />
-    <image wx:else class="stop" src="/assets/icon/pause.png" catch:tap="handlePlay" />
+    <view wx:if="{{!isPlay}}" class="play iconfont icon-play" catch:tap="handlePlay"></view>
+    <view wx:else class="stop iconfont icon-pause" catch:tap="handlePlay"></view>
+
+    <!-- <image wx:if="{{!isPlay}}" class="play" src="/assets/icon/play.png" catch:tap="handlePlay" />
+    <image wx:else class="stop" src="/assets/icon/pause.png" catch:tap="handlePlay" /> -->
   </block>
 </view>

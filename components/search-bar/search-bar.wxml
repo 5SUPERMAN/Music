@@ -1,10 +1,7 @@
 <!--components/search-bar/search-bar.wxml-->
 <view class="search-bar">
-  <image class="search" src="/assets/icon/search.png" />
-  <input class="search-input" 
-         type="text" 
-         value="{{searchText}}"
-         placeholder="搜索" 
-         confirm-type="search" 
-         bindconfirm="handleSearch" />
+  <view class="search">
+    <view class="iconfont icon-search"></view>
+    <input class="search-input" type="text" value="{{searchText}}" placeholder="搜索" confirm-type="search" bindconfirm="handleSearch" />
+  </view>
 </view>

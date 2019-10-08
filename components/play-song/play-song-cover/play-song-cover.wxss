@@ -1,4 +1,5 @@
 /* pages/audio/childComps/song-cover/song-cover.wxss */
+@import "/assets/wxss/iconfont.wxss";
 
 .song-cover {
   text-align: center;
@@ -16,18 +17,25 @@
   box-shadow: 0 0 50rpx rgb(50, 205, 50);
   overflow: hidden;
 }
-
+.iconfont{
+  font-size: 60rpx;
+  color: #32cd32;
+}
 .play, .stop {
-  width: 100rpx;
-  height: 100rpx;
+  width: 60rpx;
+  height: 60rpx;
   border-radius: 50%;
-  opacity: 0.9;
+  opacity: 0.8;
+  text-align: center;
   position: absolute;
   top: 50%;
-  margin-top: -50rpx;
+  margin-top: -30rpx;
   left: 50%;
-  margin-left: -50rpx;
+  margin-left: -30rpx;
   z-index: 999;
+}
+.play{
+  margin-left: -20rpx !important;
 }
 .is-opacity{
   opacity: 1;

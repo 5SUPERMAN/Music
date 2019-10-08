@@ -1,4 +1,5 @@
 /* components/song-list/song-list.wxss */
+@import "/assets/wxss/iconfont.wxss";
 
 .prohibit {
   opacity: 0.3;
@@ -21,20 +22,25 @@
 .item-music .icon {
   position: absolute;
   top: 50%;
-  margin-top: -13rpx;
+  margin-top: -11rpx;
   right: 14rpx;
-  width: 26rpx;
-  height: 26rpx;
+  width: 22rpx;
+  height: 22rpx;
   padding-right: 34rpx;
   z-index: 99;
 }
-.item-music .icon-close{
+.iconfont {
+  font-size: 22rpx;
+}
+
+.item-music .close{
   position: absolute;
   top: 50%;
-  margin-top: -20rpx;
+  margin-top: -17rpx;
   right: 14rpx;
-  width: 40rpx;
-  height: 40rpx;
+  width: 34rpx;
+  height: 34rpx;
+  font-size: 34rpx;
   padding-right: 34rpx;
   z-index: 99;
 }

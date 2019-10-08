@@ -1,4 +1,6 @@
 /* pages/index/childComps/new-music/new-music.wxss */
+@import "/assets/wxss/iconfont.wxss";
+
 .new-music{
   margin-bottom: 30rpx;
 }
@@ -17,15 +19,11 @@
   float: right;
   font-size: 26rpx;
   color: #515151;
-  padding-right: 20rpx;
 }
 
-.icon {
-  position: absolute;
-  top: 24rpx;
-  right: 20rpx;
-  width: 26rpx;
-  height: 26rpx;
+.iconfont {
+  float: right;
+  font-size: 22rpx;
 }
 
 /* .new-item {
@@ -33,7 +31,7 @@
 } */
 
 .item-music {
-  padding: 10rpx 20rpx;
+  padding: 10rpx 24rpx;
   position: relative;
 }
 .item-music-hover{
@@ -43,9 +41,7 @@
 .item-music .icon {
   position: absolute;
   top: 54rpx;
-  right: 20rpx;
-  width: 26rpx;
-  height: 26rpx;
+  right: 24rpx;
 }
 
 .item-image {

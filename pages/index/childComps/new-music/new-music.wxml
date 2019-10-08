@@ -2,8 +2,9 @@
 <view class="new-music">
   <view class="item-title">
     <text class="title">{{title}}</text>
+    <text class="iconfont icon-arrow"></text>
     <text class="right" bindtap="handleMore">更多</text>
-    <image class="icon" src="/assets/icon/arrow.png" />
+    <!-- <image class="icon" src="/assets/icon/arrow.png" /> -->
   </view>
 
   <view class="new-item">
@@ -16,7 +17,8 @@
         <image class="item-image" src="{{item.image}}" />
         <text class="song-name {{songId === item.songId ? 'song-name-play' : ''}}">{{item.songName}}</text>
         <text class="singer {{songId === item.songId ? 'song-name-play' : ''}}">{{item.singer}}</text>
-        <image class="icon" src="/assets/icon/arrow.png" />
+        <text class="icon iconfont icon-arrow"></text>
+        <!-- <image class="icon" src="/assets/icon/arrow.png" /> -->
       </view>
     </block>
   </view>

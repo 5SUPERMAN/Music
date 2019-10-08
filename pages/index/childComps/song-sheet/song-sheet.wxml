@@ -2,8 +2,9 @@
 <view class="song-sheet">
   <view class="item-title">
     <text class="title">{{title}}</text>
+    <text class="iconfont icon-arrow"></text>
     <text class="right" bindtap="handleSheetMore">更多</text>
-    <image class="icon" src="/assets/icon/arrow.png" />
+    <!-- <image class="icon" src="/assets/icon/arrow.png" /> -->
   </view>
 
   <view class="sheet-item">
