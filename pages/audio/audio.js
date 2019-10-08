@@ -3,11 +3,19 @@ let app = getApp();
 
 Page({
   data: {
-    audioSong: {}
+    audioSong: {},
+    // coverOrLyric: true,
+    isOpacity: true
   },
   onShow: function () {
     this.setData({
       audioSong: app.globalData.audioSong
+    })
+  },
+  handleCoverOrLyric() {
+    this.setData({
+      // coverOrLyric: !this.data.coverOrLyric,
+      isOpacity: !this.data.isOpacity
     })
   }
 })

@@ -7,3 +7,5 @@
     </view>
   </block>
 </view>
+
+<loading wx:if="{{isLoading_2}}" type="circle" />

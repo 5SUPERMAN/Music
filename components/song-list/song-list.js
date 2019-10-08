@@ -179,8 +179,8 @@ Component({
       backgroundAudioManager.singer = res.data[index].singer;
       backgroundAudioManager.src = res.data[index].url;
 
-      const page = getCurrentPages();
-      page[page.length - 1].onShow();
+      // const page = getCurrentPages();
+      // page[page.length - 1].onShow();
 
       backgroundAudioManager.play();
     }

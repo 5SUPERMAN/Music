@@ -1,2 +1,7 @@
 <!--pages/search-detail/search-detail.wxml-->
-<song-list music="{{searchDetail}}" />
+<block>
+  <loading wx:if="{{isLoading_1}}" is-loading="is-loading" />
+  <song-list wx:else music="{{searchDetail}}" />
+</block>
+
+<loading wx:if="{{isLoading_2}}" type="circle" />

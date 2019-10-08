@@ -1,1 +1,4 @@
 /* pages/search-detail/search-detail.wxss */
+.is-loading{
+  margin-top: 80rpx;
+}

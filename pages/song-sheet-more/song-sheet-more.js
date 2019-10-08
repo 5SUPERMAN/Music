@@ -9,7 +9,8 @@ let app = getApp();
 Page({
   data: {
     recommendMore: [],
-    topMore: []
+    topMore: [],
+    isLoading_2: false
   },
   onLoad: function(options) {
     const eventChannel = this.getOpenerEventChannel();
@@ -29,6 +30,9 @@ Page({
     })
   },
   onReachBottom: function() {
+    this.setData({
+      isLoading_2: true
+    })
     if(this.data.recommendMore.length !== 0){
       this._getRecommendSong(30);
     }else{
@@ -81,6 +85,7 @@ Page({
       this.data.recommendMore.push(...nullRecommendMore.slice(length))
       this.setData({
         recommendMore: this.data.recommendMore,
+        isLoading_2: false
       })
 
     }).catch(err => {
@@ -110,7 +115,8 @@ Page({
       })
       this.data.topMore.push(...nullTopMore.slice(length))
       this.setData({
-        topMore: this.data.topMore
+        topMore: this.data.topMore,
+        isLoading_2: false
       })
     }).catch(err => {
       console.error(err)

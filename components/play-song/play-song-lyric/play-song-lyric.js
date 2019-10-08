@@ -106,7 +106,7 @@ Component({
       backgroundAudioManager.singer = res.data[index].singer;
       backgroundAudioManager.src = res.data[index].url;
 
-      page[page.length - 1].onLoad();
+      // page[page.length - 1].onLoad();
 
       app.globalData.lastSongId = app.globalData.audioSong.songId;
       this._getLyric(this.properties.songId);

@@ -1,7 +1,10 @@
 <!--pages/audio/audio.wxml-->
-<view class="audio" style="background: url({{audioSong.image}})">
+<view class="audio" style="background: url({{audioSong.image}})" bindtap="handleCoverOrLyric">
   <song-name songName="{{audioSong.songName}}" singer="{{audioSong.singer}}" />
-  <song-cover song="{{audioSong}}" />
+  <block>
+    <song-cover isOpacity="{{isOpacity}}" song="{{audioSong}}" />
+    <song-lyric isOpacity="{{isOpacity}}" songId="{{audioSong.songId}}" />
+  </block>
 
   <view class="mask"></view>
   <open-data wx:if="{{!audioSong.songId}}" class="bgi" type="userAvatarUrl"></open-data>

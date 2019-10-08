@@ -1,5 +1,7 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "loading": "/components/loading/loading"
+  },
   "navigationBarTitleText": "音乐歌单",
   "onReachBottomDistance": 150
 }
