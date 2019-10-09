@@ -10,3 +10,5 @@
 
 <!-- 热门歌单 -->
 <song-sheet title="{{hotTitle}}" songSheet="{{topSong}}" bind:handleSheetMore="handleTopMore"/>
+
+<!-- <tabbar /> -->

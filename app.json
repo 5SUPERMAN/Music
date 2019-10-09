@@ -29,12 +29,6 @@
         "selectedIconPath": "/assets/icon/musiclibrary_active.png"
       },
       {
-        "pagePath": "pages/audio/audio",
-        "text": "播放",
-        "iconPath": "/assets/icon/music.png",
-        "selectedIconPath": "/assets/icon/music_active.png"
-      },
-      {
         "pagePath": "pages/profile/profile",
         "text": "我的",
         "iconPath": "/assets/icon/people.png",

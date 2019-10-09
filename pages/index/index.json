@@ -1,5 +1,6 @@
 {
   "usingComponents": {
+    "tabbar": "/components/tabbar/tabbar",
     "search-bar": "/components/search-bar/search-bar",
     "new-music": "./childComps/new-music/new-music",
     "song-sheet": "./childComps/song-sheet/song-sheet"

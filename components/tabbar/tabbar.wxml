@@ -1,0 +1,9 @@
+<!--components/tabbar/tabbar.wxml-->
+ <view class="tabbar">
+  <block wx:for="{{tabbar.list}}" wx:key="{{index}}">
+    <view class="tab-item" data-="{{index}}">
+      <image class="tab-icon" src="{{item.iconPath}}" />
+      <view class="tab-text">{{item.text}}</view>
+    </view>
+  </block>
+ </view>

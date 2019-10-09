@@ -1,0 +1,22 @@
+/* components/tabbar/tabbar.wxss */
+.tabbar{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  height: 50px;
+  background-color: #fff;
+  box-shadow: 0 0 5px #32cd32;
+  display: flex;
+  text-align: center;
+  padding: 5px 0;
+  font-size: 12px;
+}
+.tab-item{
+  flex: 1;
+}
+.tab-icon{
+  width: 30px;
+  height: 30px;
+}
