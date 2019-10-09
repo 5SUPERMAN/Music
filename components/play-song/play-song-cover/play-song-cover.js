@@ -19,19 +19,19 @@ Component({
   },
   lifetimes: {
     ready: function() {
-      this.setData({
-        isPlay: app.globalData.isPlay
-      })
-
       if (app.globalData.audioSong.songId !== app.globalData.lastSongId) {
         app.globalData.lastSongId = app.globalData.audioSong.songId;
         this.properties.song.songId = app.globalData.audioSong.songId;
         app.globalData.time = 0;
       }
 
-      // if (app.globalData.time === 0 && app.globalData.audioSong.songId) {
+      if (app.globalData.audioSong.songId) {
+        app.globalData.isPlay = true;
+        this.setData({
+          isPlay: app.globalData.isPlay
+        })
         backgroundAudioManager.play();
-      // }
+      }
       // backgroundAudioManager.onTimeUpdate(() => {
       //   app.globalData.time += 0.25;
       // })
@@ -39,9 +39,12 @@ Component({
   },
   pageLifetimes: {
     show: function() {
-      this.setData({
-        isPlay: app.globalData.isPlay
-      })
+      if(app.globalData.audioSong.songId){
+        app.globalData.isPlay = true;
+        this.setData({
+          isPlay: app.globalData.isPlay
+        })
+      }
     }
   },
   methods: {
