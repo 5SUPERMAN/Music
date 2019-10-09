@@ -28,7 +28,7 @@ Component({
       this._getLyric(this.properties.songId);
 
       backgroundAudioManager.onTimeUpdate(() => {
-        app.globalData.time += 0.25;
+        app.globalData.time = backgroundAudioManager.currentTime;
 
         for (let i = 0; i < this.data.lyric.length - 1; i++) {
           if (
@@ -87,9 +87,15 @@ Component({
     orderPlay(res, index) {
       index = index || 0;
       const page = getCurrentPages();
-      page[page.length - 1].setData({
-        audioSong: res.data[index]
-      })
+      // page[page.length - 1].setData({
+      //   audioSong: res.data[index]
+      // })
+      if (page.length > 0 && page[page.length - 1].route === "pages/audio-02/audio-02") {
+        page[page.length - 1].setData({
+          audioSong: res.data[index]
+        })
+      }
+
       app.globalData.audioSong = res.data[index];
 
       app.globalData.isPlay = !app.globalData.isPlay;
