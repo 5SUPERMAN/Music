@@ -1,14 +1,16 @@
 <!--pages/index/index.wxml-->
-<!-- 搜索 -->
-<search-bar />
+<view class="index">
+  <!-- 搜索 -->
+  <search-bar />
 
-<!-- 新歌推荐 -->
-<new-music bind:handleplay="handlePlay" bind:handleMore="handleMore" bind:imageload="imageLoad"  title="{{newTitle}}" indexNewMusic="{{indexNewMusic}}" songId="{{songId}}"/>
+  <!-- 新歌推荐 -->
+  <new-music bind:handleplay="handlePlay" bind:handleMore="handleMore" bind:imageload="imageLoad" title="{{newTitle}}" indexNewMusic="{{indexNewMusic}}" songId="{{songId}}" />
 
-<!-- 推荐歌单 -->
-<song-sheet title="{{recommendTitle}}" songSheet="{{recommendSong}}" bind:handleSheetMore="handleRecommendMore"/>
+  <!-- 推荐歌单 -->
+  <song-sheet title="{{recommendTitle}}" songSheet="{{recommendSong}}" bind:handleSheetMore="handleRecommendMore" />
 
-<!-- 热门歌单 -->
-<song-sheet title="{{hotTitle}}" songSheet="{{topSong}}" bind:handleSheetMore="handleTopMore"/>
+  <!-- 热门歌单 -->
+  <song-sheet title="{{hotTitle}}" songSheet="{{topSong}}" bind:handleSheetMore="handleTopMore" />
+</view>
 
-<!-- <tabbar /> -->
+<tabbar tabbar="{{tabbar}}" />

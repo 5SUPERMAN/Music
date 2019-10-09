@@ -1,1 +1,4 @@
 /* pages/index/index.wxss */
+.index{
+  padding-bottom: 110rpx;
+}

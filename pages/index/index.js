@@ -18,6 +18,7 @@ let app = getApp();
 
 Page({
   data: {
+    tabbar: {},
     newTitle: '新歌推荐',
     recommendTitle: '推荐歌单',
     hotTitle: '热门歌单',
@@ -30,6 +31,8 @@ Page({
     topMore: []
   },
   onLoad: function(options) {
+    app.editTabbar()
+
     this._getNewMusic();
     this._getRecommendSong();
     this._getTopSong();

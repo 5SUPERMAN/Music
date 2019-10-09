@@ -1,41 +1,45 @@
-// components/tabbar/tabbar.js
+// tabBarComponent/tabBar.js
+const app = getApp();
 Component({
   /**
    * 组件的属性列表
    */
   properties: {
-
+    tabbar: {
+      type: Object,
+      value: {
+        "backgroundColor": "#ffffff",
+        "color": "#979795",
+        "selectedColor": "#1c1c1b",
+        "list": [
+          {
+            "pagePath": "pages/index/index",
+            "iconPath": "icon/icon_home.png",
+            "selectedIconPath": "icon/icon_home_HL.png",
+            "text": "首页"
+          },
+          {
+            "pagePath": "pages/middle/middle",
+            "iconPath": "icon/icon_release.png",
+            "isSpecial": true,
+            "text": "发布"
+          },
+          {
+            "pagePath": "pages/mine/mine",
+            "iconPath": "icon/icon_mine.png",
+            "selectedIconPath": "icon/icon_mine_HL.png",
+            "text": "我的"
+          }
+        ]
+      }
+    }
   },
 
   /**
    * 组件的初始数据
    */
   data: {
-    tabbar: {
-      "backgroundColor": "#ffffff",
-      "color": "#515151",
-      "selectedColor": "#32cd32",
-      "list": [
-        {
-          "pagePath": "/pages/index/index",
-          "iconPath": "/assets/icon/musiclibrary.png",
-          "selectedIconPath": "/assets/icon/musiclibrary_active.png",
-          "text": "音乐库"
-        },
-        {
-          "pagePath": "/pages/audio/audio",
-          "iconPath": "/assets/icon/music.png",
-          "selectedIconPath": "/assets/icon/music_active.png",
-          "text": "播放页"
-        },
-        {
-          "pagePath": "/pages/porfile/profile",
-          "iconPath": "/assets/icon/people.png",
-          "selectedIconPath": "/assets/icon/people_active.png",
-          "text": "我的"
-        }
-      ]
-    }
+    // isIphoneX: app.globalData.systemInfo.model == "iPhone X" ? true : false
   },
 
   /**

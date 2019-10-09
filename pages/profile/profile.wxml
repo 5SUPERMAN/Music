@@ -1,4 +1,8 @@
 <!--pages/profile/profile.wxml-->
-<profile-header />
+<view class="profile">
+  <profile-header />
 
-<song-list  music="{{profileMusic}}" isArrow="{{isClose}}" />
+  <song-list music="{{profileMusic}}" isArrow="{{isClose}}" />
+</view>
+
+<tabbar tabbar="{{tabbar}}" />
