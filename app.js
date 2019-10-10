@@ -21,7 +21,7 @@ App({
           "text": "音乐库"
         },
         {
-          "pagePath": "/pages/audio-02/audio-02",
+          "pagePath": "/pages/audio/audio",
           "iconPath": "icon/music_active.png",
           "isSpecial": true,
           "text": ""

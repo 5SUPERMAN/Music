@@ -83,11 +83,11 @@ Component({
         })
 
         wx.navigateTo({
-          url: '/pages/audio-02/audio-02'
+          url: '/pages/audio/audio'
         })
       } else {
         wx.navigateTo({
-          url: '/pages/audio-02/audio-02'
+          url: '/pages/audio/audio'
         })
       }
 

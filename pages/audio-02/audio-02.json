@@ -1,7 +1,0 @@
-{
-  "usingComponents": {
-    "song-name": "/components/play-song/play-song-name/play-song-name",
-    "song-cover": "/components/play-song/play-song-cover/play-song-cover",
-    "song-lyric": "/components/play-song/play-song-lyric/play-song-lyric"
-  }
-}
