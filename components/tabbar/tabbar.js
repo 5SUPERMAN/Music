@@ -13,21 +13,21 @@ Component({
         "selectedColor": "#1c1c1b",
         "list": [
           {
-            "pagePath": "pages/index/index",
-            "iconPath": "icon/icon_home.png",
-            "selectedIconPath": "icon/icon_home_HL.png",
-            "text": "首页"
+            "pagePath": "/pages/index/index",
+            "iconPath": "icon/erji.png",
+            "selectedIconPath": "icon/erji_active.png",
+            "text": "音乐库"
           },
           {
-            "pagePath": "pages/middle/middle",
-            "iconPath": "icon/icon_release.png",
+            "pagePath": "/pages/audio/audio",
+            "iconPath": "icon/music_active.png",
             "isSpecial": true,
-            "text": "发布"
+            "text": ""
           },
           {
-            "pagePath": "pages/mine/mine",
-            "iconPath": "icon/icon_mine.png",
-            "selectedIconPath": "icon/icon_mine_HL.png",
+            "pagePath": "/pages/profile/profile",
+            "iconPath": "icon/xiaolian.png",
+            "selectedIconPath": "icon/xiaolian_active.png",
             "text": "我的"
           }
         ]

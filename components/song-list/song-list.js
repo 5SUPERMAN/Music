@@ -92,16 +92,9 @@ Component({
       }
 
       backgroundAudioManager.onPlay(() => {
-        // app.globalData.isPlay = !app.globalData.isPlay;
-        // app.globalData.songId = this.properties.music[index].songId;
-        // app.globalData.playSong = this.properties.music[index].songId;
         this.setData({
           songId: app.globalData.playSong
         })
-
-        // wx.navigateTo({
-        //   url: '/pages/audio-02/audio-02'
-        // })
       })
 
       backgroundAudioManager.onPause(() => {
@@ -113,6 +106,7 @@ Component({
       })
 
       backgroundAudioManager.onStop(() => {
+        console.log("song-list")
         app.globalData.isPlay = !app.globalData.isPlay;
         app.globalData.songId = 0;
         app.globalData.playSong = 0;
@@ -121,33 +115,8 @@ Component({
         })
 
         const pages = getCurrentPages();
-        pages[0].onShow();
+        pages[pages.length - 1].onShow();
       })
-
-      // backgroundAudioManager.onEnded(() => {
-      //   app.globalData.time = 0;
-
-      //   wx.getStorage({
-      //     key: 'cacheMusic',
-      //     success: res => {
-      //       let newIndex = 0
-      //       for (let i = 0; i < res.data.length; i++) {
-      //         if (res.data[i].songId === app.globalData.audioSong.songId) {
-      //           newIndex = i;
-      //           break;
-      //         }
-      //       }
-      //       if ((res.data.length - 1) !== newIndex) {
-      //         this.orderPlay(res, newIndex + 1);
-      //       }else{
-      //         this.orderPlay(res);
-      //       }
-      //     },
-      //     fail: function (err) {
-      //       console.error(err)
-      //     }
-      //   })
-      // })
     },
     handleDel(e) {
       const index = e.currentTarget.dataset.index;
@@ -159,30 +128,6 @@ Component({
 
       const page = getCurrentPages();
       page[0].onShow();
-    },
-
-    // 顺序播放
-    // orderPlay(res,index) {
-    //   index = index || 0;
-    //   app.globalData.audioSong = res.data[index];
-
-    //   app.globalData.isPlay = !app.globalData.isPlay;
-    //   app.globalData.songId = res.data[index].songId;
-    //   app.globalData.playSong = res.data[index].songId;
-    //   this.setData({
-    //     songId: app.globalData.playSong
-    //   })
-
-    //   innerAudioContext.src = res.data[index].url;
-    //   backgroundAudioManager.title = res.data[index].songName;
-    //   backgroundAudioManager.coverImgUrl = res.data[index].image;
-    //   backgroundAudioManager.singer = res.data[index].singer;
-    //   backgroundAudioManager.src = res.data[index].url;
-
-    //   // const page = getCurrentPages();
-    //   // page[page.length - 1].onShow();
-
-    //   backgroundAudioManager.play();
-    // }
+    }
   }
 })

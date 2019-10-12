@@ -3,7 +3,7 @@
   <song-name songName="{{audioSong.songName}}" singer="{{audioSong.singer}}" />
   <block>
     <song-cover isOpacity="{{isOpacity}}" song="{{audioSong}}" />
-    <song-lyric isOpacity="{{isOpacity}}" songId="{{audioSong.songId}}" />
+    <song-lyric isOpacity="{{isOpacity}}" lyric="{{lyric}}" />
   </block>
 
   <view class="mask"></view>
