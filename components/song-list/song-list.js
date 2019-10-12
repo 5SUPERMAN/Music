@@ -106,16 +106,12 @@ Component({
       })
 
       backgroundAudioManager.onStop(() => {
-        console.log("song-list")
         app.globalData.isPlay = !app.globalData.isPlay;
         app.globalData.songId = 0;
         app.globalData.playSong = 0;
         this.setData({
           songId: 0
         })
-
-        const pages = getCurrentPages();
-        pages[pages.length - 1].onShow();
       })
     },
     handleDel(e) {
